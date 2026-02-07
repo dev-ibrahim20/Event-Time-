@@ -18,9 +18,10 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next)
     {
-        // Check if locale is in session
+        // Check if locale is in session (highest priority)
         if (Session::has('locale')) {
-            App::setLocale(Session::get('locale'));
+            $locale = Session::get('locale');
+            App::setLocale($locale);
         }
         // Check if locale is in request (from URL parameter)
         elseif ($request->has('lang')) {

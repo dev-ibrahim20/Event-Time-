@@ -48,22 +48,22 @@
     <!-- Hero Content -->
     <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto" data-aos="fade-up">
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            {{ __('وقت الحدث') }}
+            {{ app()->getLocale() == 'ar' ? 'وقت الحدث' : 'Event Time' }}
             <span class="block text-2xl md:text-4xl lg:text-5xl mt-2 text-red-400">Event Time</span>
         </h1>
         <p class="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed">
-            {{ __('الشريك الموثوق في تجهيز المؤتمرات والمعارض والخيام الأوروبية بأعلى معايير الجودة والاحترافية') }}
+            {{ app()->getLocale() == 'ar' ? 'الشريك الموثوق في تجهيز المؤتمرات والمعارض والخيام الأوروبية بأعلى معايير الجودة والاحترافية' : 'Your trusted partner for conference, exhibition, and European tent setup with the highest quality and professional standards' }}
         </p>
         
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center" data-aos="fade-up" data-aos-delay="200">
             <a href="{{ route('quote') }}" class="bg-gradient-to-r from-red-600 to-red-800 text-white px-8 py-4 rounded-lg text-lg font-bold hover:from-red-700 hover:to-red-900 transition-all duration-300 transform hover:scale-105 shadow-2xl">
                 <i class="fas fa-file-invoice ml-2"></i>
-                {{ __('طلب عرض سعر') }}
+                {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
             </a>
             <a href="tel:+966500000000" class="bg-white/20 backdrop-blur-md text-white border-2 border-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
                 <i class="fas fa-phone ml-2"></i>
-                {{ __('اتصال سريع') }}
+                {{ app()->getLocale() == 'ar' ? 'اتصال سريع' : 'Quick Call' }}
             </a>
         </div>
     </div>
@@ -79,10 +79,10 @@
     <div class="container mx-auto px-4">
         <div class="text-center mb-16" data-aos="fade-up">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                {{ __('لماذا تختار وقت الحدث؟') }}
+                {{ app()->getLocale() == 'ar' ? 'لماذا تختار وقت الحدث؟' : 'Why Choose Event Time?' }}
             </h2>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                {{ __('نقدم حلولاً متكاملة ومبتكرة لجميع فعالياتكم بمعايير عالمية وجودة فائقة') }}
+                {{ app()->getLocale() == 'ar' ? 'نقدم حلولاً متكاملة ومبتكرة لجميع فعالياتكم بمعايير عالمية وجودة فائقة' : 'We provide comprehensive and innovative solutions for all your events with world-class standards and superior quality' }}
             </p>
         </div>
         
@@ -92,8 +92,8 @@
                 <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-red-600 transition-colors duration-300">
                     <i class="fas fa-award text-red-600 text-2xl group-hover:text-white transition-colors"></i>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ __('جودة عالمية') }}</h3>
-                <p class="text-gray-600">{{ __('نستخدم أفضل المواد والتقنيات العالمية في جميع خدماتنا') }}</p>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'جودة عالمية' : 'World Class Quality' }}</h3>
+                <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'نستخدم أفضل المواد والتقنيات العالمية في جميع خدماتنا' : 'We use the best materials and technologies in all our services' }}</p>
             </div>
             
             <!-- Feature 2 -->
@@ -101,8 +101,8 @@
                 <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-red-600 transition-colors duration-300">
                     <i class="fas fa-clock text-red-600 text-2xl group-hover:text-white transition-colors"></i>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ __('التزام بالمواعيد') }}</h3>
-                <p class="text-gray-600">{{ __('نلتزم بتسليم جميع المشاريع في الوقت المحدد') }}</p>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'التزام بالمواعيد' : 'On-Time Commitment' }}</h3>
+                <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'نلتزم بتسليم جميع المشاريع في الوقت المحدد' : 'We are committed to delivering all projects on time' }}</p>
             </div>
             
             <!-- Feature 3 -->
@@ -110,8 +110,8 @@
                 <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-red-600 transition-colors duration-300">
                     <i class="fas fa-users text-red-600 text-2xl group-hover:text-white transition-colors"></i>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ __('فريق محترف') }}</h3>
-                <p class="text-gray-600">{{ __('فريق عمل متخصص ومدرب على أعلى مستوى') }}</p>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'فريق محترف' : 'Professional Team' }}</h3>
+                <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'فريق عمل متخصص ومدرب على أعلى مستوى' : 'Specialized and highly trained team' }}</p>
             </div>
             
             <!-- Feature 4 -->
@@ -119,8 +119,8 @@
                 <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-red-600 transition-colors duration-300">
                     <i class="fas fa-handshake text-red-600 text-2xl group-hover:text-white transition-colors"></i>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ __('ثقة وضمان') }}</h3>
-                <p class="text-gray-600">{{ __('نقدم ضمانات على جميع خدماتنا ومنتجاتنا') }}</p>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'ثقة وضمان' : 'Trust & Guarantee' }}</h3>
+                <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'نقدم ضمانات على جميع خدماتنا ومنتجاتنا' : 'We provide guarantees on all our services and products' }}</p>
             </div>
         </div>
     </div>
@@ -131,10 +131,10 @@
     <div class="container mx-auto px-4">
         <div class="text-center mb-16" data-aos="fade-up">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                {{ __('خدماتنا المميزة') }}
+                {{ app()->getLocale() == 'ar' ? 'خدماتنا المميزة' : 'Our Featured Services' }}
             </h2>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                {{ __('نقدم مجموعة شاملة من الخدمات المتخصصة لتلبية جميع احتياجات فعالياتكم') }}
+                {{ app()->getLocale() == 'ar' ? 'نقدم مجموعة شاملة من الخدمات المتخصصة لتلبية جميع احتياجات فعالياتكم' : 'We offer a comprehensive range of specialized services to meet all your event needs' }}
             </p>
         </div>
         
@@ -145,10 +145,10 @@
                     <i class="fas fa-campground text-white text-5xl"></i>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ __('الخيام الأوروبية') }}</h3>
-                    <p class="text-gray-600 mb-4">{{ __('خيام أوروبية بمواصفات عالمية وأحجام متنوعة') }}</p>
-                    <a href="{{ route('services') }}#tents" class="text-red-600 font-bold hover:text-red-700 transition-colors">
-                        {{ __('تفاصيل أكثر') }} <i class="fas fa-arrow-left mr-1"></i>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'الخيام الأوروبية' : 'European Tents' }}</h3>
+                    <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'خيام أوروبية بمواصفات عالمية وأحجام متنوعة' : 'European tents with world-class specifications and various sizes' }}</p>
+                    <a href="{{ route('services') }}" class="text-red-600 font-bold hover:text-red-700 transition-colors">
+                        {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>
             </div>
@@ -159,10 +159,10 @@
                     <i class="fas fa-users text-white text-5xl"></i>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ __('تجهيز المؤتمرات') }}</h3>
-                    <p class="text-gray-600 mb-4">{{ __('شاشات LED وإضاءة وصوتيات احترافية') }}</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'تجهيز المؤتمرات' : 'Conference Setup' }}</h3>
+                    <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'شاشات LED وإضاءة وصوتيات احترافية' : 'Professional LED screens, lighting, and sound systems' }}</p>
                     <a href="{{ route('services') }}#conferences" class="text-red-600 font-bold hover:text-red-700 transition-colors">
-                        {{ __('تفاصيل أكثر') }} <i class="fas fa-arrow-left mr-1"></i>
+                        {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>
             </div>
@@ -173,10 +173,10 @@
                     <i class="fas fa-store text-white text-5xl"></i>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ __('أجنحة المعارض') }}</h3>
-                    <p class="text-gray-600 mb-4">{{ __('تصميم وبناء أجنحة معارض احترافية') }}</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'أجنحة المعارض' : 'Exhibition Stands' }}</h3>
+                    <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'تصميم وبناء أجنحة معارض احترافية' : 'Professional exhibition stand design and construction' }}</p>
                     <a href="{{ route('services') }}#exhibitions" class="text-red-600 font-bold hover:text-red-700 transition-colors">
-                        {{ __('تفاصيل أكثر') }} <i class="fas fa-arrow-left mr-1"></i>
+                        {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>
             </div>
@@ -187,10 +187,10 @@
                     <i class="fas fa-glass-cheers text-white text-5xl"></i>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ __('تجهيز الحفلات') }}</h3>
-                    <p class="text-gray-600 mb-4">{{ __('تنظيم وتجهيز الحفلات والمناسبات الرسمية') }}</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'تجهيز الحفلات' : 'Event Setup' }}</h3>
+                    <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'تنظيم وتجهيز الحفلات والمناسبات الرسمية' : 'Organization and setup of parties and official occasions' }}</p>
                     <a href="{{ route('services') }}#events" class="text-red-600 font-bold hover:text-red-700 transition-colors">
-                        {{ __('تفاصيل أكثر') }} <i class="fas fa-arrow-left mr-1"></i>
+                        {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>
             </div>
@@ -203,19 +203,19 @@
     <div class="container mx-auto px-4 text-center">
         <div class="max-w-3xl mx-auto" data-aos="fade-up">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                {{ __('هل أنت مستعد لتنظيم فعاليتك المثالية؟') }}
+                {{ app()->getLocale() == 'ar' ? 'هل أنت مستعد لتنظيم فعاليتك المثالية؟' : '?Are you ready to organize your perfect event' }}
             </h2>
             <p class="text-xl mb-8 text-red-100">
-                {{ __('تواصل معنا الآن واحصل على استشارة مجانية وعرض سعر خاص') }}
+                {{ app()->getLocale() == 'ar' ? 'تواصل معنا الآن واحصل على استشارة مجانية وعرض سعر خاص' : 'Contact us now and get a free consultation and special quote' }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('quote') }}" class="bg-white text-red-600 px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
                     <i class="fas fa-file-invoice ml-2"></i>
-                    {{ __('طلب عرض سعر') }}
+                    {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
                 </a>
-                <a href="{{ route('contact') }}" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
+                <a href="tel:+966500000000" class="bg-white/20 backdrop-blur-md text-white border-2 border-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
                     <i class="fas fa-phone ml-2"></i>
-                    {{ __('اتصل بنا') }}
+                    {{ app()->getLocale() == 'ar' ? 'اتصال سريع' : 'Quick Call' }}
                 </a>
             </div>
         </div>

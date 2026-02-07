@@ -7,24 +7,24 @@
                     <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center">
                         <i class="fas fa-calendar-alt text-white text-xl"></i>
                     </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-gray-900">وقت الحدث</h1>
-                        <p class="text-xs text-gray-600 hidden sm:block">Event Time</p>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'وقت الحدث' : 'Event Time' }}</h1>
                     </div>
                 </a>
             </div>
 
             <!-- Desktop Menu -->
-            <div class="hidden lg:flex items-center space-x-8 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : '' }}">
-                <a href="{{ route('home') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ __('الرئيسية') }}</a>
-                <a href="{{ route('services') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ __('خدماتنا') }}</a>
-                <a href="{{ route('gallery') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ __('معرض الأعمال') }}</a>
-                <a href="{{ route('about') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ __('من نحن') }}</a>
-                <a href="{{ route('contact') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ __('اتصل بنا') }}</a>
+            <div class="hidden lg:flex items-center space-x-8 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : 'space-x-8' }}">
+                <a href="{{ route('home') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}</a>
+                <a href=""></a>
+                <a href="{{ route('services') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'خدماتنا' : 'Our Services' }}</a>
+                <a href="{{ route('gallery') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'معرض الأعمال' : 'Gallery' }}</a>
+                <a href="{{ route('about') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'من نحن' : 'About Us' }}</a>
+                <a href="{{ route('contact') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'اتصل بنا' : 'Contact Us' }}</a>
             </div>
 
             <!-- CTA Buttons & Language Switcher -->
-            <div class="hidden lg:flex items-center space-x-4 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : '' }}">
+            <div class="hidden lg:flex items-center space-x-4 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : 'space-x-4' }}">
                 <!-- Language Switcher -->
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition-colors">
@@ -41,12 +41,12 @@
                 <!-- Quick Contact Button -->
                 <a href="tel:+966500000000" class="flex items-center space-x-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
                     <i class="fas fa-phone"></i>
-                    <span class="text-sm font-medium">{{ __('اتصال سريع') }}</span>
+                    <span class="text-sm font-medium">{{ app()->getLocale() == 'ar' ? 'اتصال سريع' : 'Quick Call' }}</span>
                 </a>
                 
                 <!-- Quote Request Button -->
                 <a href="{{ route('quote') }}" class="bg-gradient-to-r from-red-600 to-red-800 text-white px-6 py-2 rounded-lg hover:from-red-700 hover:to-red-900 transition-all duration-300 transform hover:scale-105">
-                    <span class="font-medium">{{ __('طلب عرض سعر') }}</span>
+                    <span class="font-medium">{{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}</span>
                 </a>
             </div>
 
@@ -60,19 +60,19 @@
     <!-- Mobile Menu -->
     <div x-show="isOpen" x-transition class="lg:hidden bg-white border-t">
         <div class="container mx-auto px-4 py-4 space-y-3">
-            <a href="{{ route('home') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ __('الرئيسية') }}</a>
-            <a href="{{ route('services') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ __('خدماتنا') }}</a>
-            <a href="{{ route('gallery') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ __('معرض الأعمال') }}</a>
-            <a href="{{ route('about') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ __('من نحن') }}</a>
-            <a href="{{ route('contact') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ __('اتصل بنا') }}</a>
+            <a href="{{ route('home') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}</a>
+            <a href="{{ route('services') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'خدماتنا' : 'Our Services' }}</a>
+            <a href="{{ route('gallery') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'معرض الأعمال' : 'Gallery' }}</a>
+            <a href="{{ route('about') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'من نحن' : 'About Us' }}</a>
+            <a href="{{ route('contact') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'اتصل بنا' : 'Contact Us' }}</a>
             
             <div class="pt-4 border-t space-y-3">
                 <a href="tel:+966500000000" class="flex items-center justify-center space-x-2 bg-red-600 text-white px-4 py-3 rounded-lg hover:bg-red-700 transition-colors">
                     <i class="fas fa-phone"></i>
-                    <span class="font-medium">{{ __('اتصال سريع') }}</span>
+                    <span class="font-medium">{{ app()->getLocale() == 'ar' ? 'اتصال سريع' : 'Quick Call' }}</span>
                 </a>
                 <a href="{{ route('quote') }}" class="block text-center bg-gradient-to-r from-red-600 to-red-800 text-white px-6 py-3 rounded-lg hover:from-red-700 hover:to-red-900 transition-all duration-300">
-                    <span class="font-medium">{{ __('طلب عرض سعر') }}</span>
+                    <span class="font-medium">{{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}</span>
                 </a>
             </div>
         </div>
