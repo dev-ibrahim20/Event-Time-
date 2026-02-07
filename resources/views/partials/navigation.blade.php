@@ -16,7 +16,9 @@
             <!-- Desktop Menu -->
             <div class="hidden lg:flex items-center space-x-8 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : 'space-x-8' }}">
                 <a href="{{ route('home') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}</a>
-                <a href=""></a>
+                @if (app()->getLocale() == 'en')
+                    <a href=""></a>
+                @endif
                 <a href="{{ route('services') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'خدماتنا' : 'Our Services' }}</a>
                 <a href="{{ route('gallery') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'معرض الأعمال' : 'Gallery' }}</a>
                 <a href="{{ route('about') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'من نحن' : 'About Us' }}</a>
