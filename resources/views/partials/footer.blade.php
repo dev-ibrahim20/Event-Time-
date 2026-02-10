@@ -91,12 +91,12 @@
         <div class="container mx-auto px-4 py-6">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                 <div class="text-gray-400 text-sm">
-                    <p>&copy; {{ date('Y') }} {{ app()->getLocale() == 'ar' ? 'وقت الحدث' : 'Event Time' }}. {{ app()->getLocale() == 'ar' ? 'جميع الحقوق محفوظة' : 'All Rights Reserved' }}.</p>
+                    <p>&copy; {{ date('Y') }} {{ __('وقت الحدث') }}. {{ __('جميع الحقوق محفوظة') }}.</p>
                 </div>
-                <div class="flex space-x-6 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : 'space-x-6' }}">
-                    <a href="#" class="text-gray-400 hover:text-red-500 text-sm transition-colors">{{ app()->getLocale() == 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy' }}</a>
-                    <a href="#" class="text-gray-400 hover:text-red-500 text-sm transition-colors">{{ app()->getLocale() == 'ar' ? 'الشروط والأحكام' : 'Terms & Conditions' }}</a>
-                    <a href="#" class="text-gray-400 hover:text-red-500 text-sm transition-colors">{{ app()->getLocale() == 'ar' ? 'خريطة الموقع' : 'Sitemap' }}</a>
+                <div class="flex space-x-6 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : '' }}">
+                    <a href="#" class="text-gray-400 hover:text-red-500 text-sm transition-colors">{{ __('سياسة الخصوصية') }}</a>
+                    <a href="#" class="text-gray-400 hover:text-red-500 text-sm transition-colors">{{ __('الشروط والأحكام') }}</a>
+                    <a href="#" class="text-gray-400 hover:text-red-500 text-sm transition-colors">{{ __('خريطة الموقع') }}</a>
                 </div>
             </div>
         </div>

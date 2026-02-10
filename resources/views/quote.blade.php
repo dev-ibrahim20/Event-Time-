@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('title', app()->getLocale() == 'ar' ? 'طلب عرض سعر - وقت الحدث' : 'Request Quote - Event Time')
 @section('description', app()->getLocale() == 'ar' ? 'احصل على عرض سعر مخصص لخدمات تجهيز المؤتمرات والمعارض والخيام الأوروبية' : 'Get a specialized quote for conference, exhibition, and European tent setup services')

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('title', app()->getLocale() == 'ar' ? 'خدماتنا - وقت الحدث' : 'Our Services - Event Time')
 @section('description', app()->getLocale() == 'ar' ? 'نقدم مجموعة شاملة من الخدمات المتخصصة لتجهيز المؤتمرات والمعارض والخيام الأوروبية والحفلات بأعلى معايير الجودة' : 'We offer a comprehensive range of specialized services for conference, exhibition, and European tent setup with the highest quality standards')

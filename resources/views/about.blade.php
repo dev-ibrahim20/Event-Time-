@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('title', app()->getLocale() == 'ar' ? 'من نحن - وقت الحدث' : 'About Us - Event Time')
 @section('description', app()->getLocale() == 'ar' ? 'تعرف على شركة وقت الحدث الرائدة في تجهيز المؤتمرات والمعارض والخيام الأوروبية' : 'Learn about Event Time, the leading company in conference, exhibition, and European tent setup')
@@ -35,7 +35,6 @@
 }
 </script>
 @endsection
-
 @section('content')
 <!-- Hero Section -->
 <section class="relative py-20 bg-gradient-to-br from-red-600 to-red-800 text-white overflow-hidden">

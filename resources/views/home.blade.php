@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('title', app()->getLocale() == 'ar' ? 'وقت الحدث - تجهيز المؤتمرات والمعارض والخيام الأوروبية' : 'Event Time - Conference, Exhibition & European Tent Setup')
 @section('description', app()->getLocale() == 'ar' ? 'شركة وقت الحدث الرائدة في تجهيز المؤتمرات والمعارض والخيام الأوروبية بأعلى معايير الجودة والاحترافية في المملكة العربية السعودية' : 'Leading company in conference, exhibition, and European tent setup with highest quality and professional standards in Saudi Arabia')
@@ -147,7 +147,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'الخيام الأوروبية' : 'European Tents' }}</h3>
                     <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'خيام أوروبية بمواصفات عالمية وأحجام متنوعة' : 'European tents with world-class specifications and various sizes' }}</p>
-                    <a href="{{ route('services') }}" class="text-red-600 font-bold hover:text-red-700 transition-colors">
+                    <a href="#" class="text-red-600 font-bold hover:text-red-700 transition-colors">
                         {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>
@@ -161,7 +161,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'تجهيز المؤتمرات' : 'Conference Setup' }}</h3>
                     <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'شاشات LED وإضاءة وصوتيات احترافية' : 'Professional LED screens, lighting, and sound systems' }}</p>
-                    <a href="{{ route('services') }}#conferences" class="text-red-600 font-bold hover:text-red-700 transition-colors">
+                    <a href="#conferences" class="text-red-600 font-bold hover:text-red-700 transition-colors">
                         {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>
@@ -175,7 +175,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'أجنحة المعارض' : 'Exhibition Stands' }}</h3>
                     <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'تصميم وبناء أجنحة معارض احترافية' : 'Professional exhibition stand design and construction' }}</p>
-                    <a href="{{ route('services') }}#exhibitions" class="text-red-600 font-bold hover:text-red-700 transition-colors">
+                    <a href="#exhibitions" class="text-red-600 font-bold hover:text-red-700 transition-colors">
                         {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>
@@ -189,7 +189,7 @@
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'تجهيز الحفلات' : 'Event Setup' }}</h3>
                     <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'تنظيم وتجهيز الحفلات والمناسبات الرسمية' : 'Organization and setup of parties and official occasions' }}</p>
-                    <a href="{{ route('services') }}#events" class="text-red-600 font-bold hover:text-red-700 transition-colors">
+                    <a href="#events" class="text-red-600 font-bold hover:text-red-700 transition-colors">
                         {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>

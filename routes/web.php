@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactMessagesController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Language switch route
 Route::get('language/{locale}', function ($locale) {
@@ -27,7 +32,6 @@ Route::get('language/{locale}', function ($locale) {
 })->name('language.switch');
 
 // Frontend Routes
-Route::group(['middleware' => 'web'], function() {
     Route::get('services', function () {
         return view('services');
     })->name('services');
@@ -39,6 +43,8 @@ Route::group(['middleware' => 'web'], function() {
     Route::get('contact', function () {
         return view('contact');
     })->name('contact');
+
+    Route::post('contact', [ContactMessagesController::class, 'store'])->name('contact.submit');
     
     Route::get('gallery', function () {
         return view('gallery');
@@ -47,9 +53,31 @@ Route::group(['middleware' => 'web'], function() {
     Route::get('quote', function () {
         return view('quote');
     })->name('quote');
+
+
+
+
+
+
+
+
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Start Services Routes
+    Route::get('/admin-services/create', [ServicesController::class, 'create'])->name('admin-services.create');
+    Route::post('/admin-services', [ServicesController::class, 'store'])->name('admin-services.store');
+    Route::resource('admin-services', ServicesController::class)->except(['create', 'store']);
+
+    Route::get('/admin-contact-messages', [ContactMessagesController::class, 'index'])->name('admin-contact-messages.index');
+    Route::delete('/admin-contact-messages/{id}', [ContactMessagesController::class, 'destroy'])->name('admin-contact-messages.destroy');
+
 });
 
-// Admin Routes
-Route::prefix('admin')->name('admin.')->group(function () {
-    require __DIR__.'/admin.php';
-});
+require __DIR__.'/auth.php';

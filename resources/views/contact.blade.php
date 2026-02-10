@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('title', app()->getLocale() == 'ar' ? 'اتصل بنا - وقت الحدث' : 'Contact Us - Event Time')
 @section('description', app()->getLocale() == 'ar' ? 'تواصل معنا للحصول على خدمات تجهيز المؤتمرات والمعارض والخيام الأوروبية بأعلى جودة' : 'Contact us to get conference, exhibition, and European tent setup services with the highest quality')
@@ -440,7 +440,7 @@ window.handleContactForm = async function(formId) {
     submitBtn.disabled = true;
 
     try {
-        const response = await fetch('/api/contact', {
+        const response = await fetch('/contact', {
             method: 'POST',
             body: formData,
             headers: {
