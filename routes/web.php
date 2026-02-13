@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactMessagesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PapersController;
@@ -103,6 +104,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin-team-members/{teamMember}/edit', [TeamMemberController::class, 'edit'])->name('admin-team-members.edit');
     Route::put('/admin-team-members/{teamMember}', [TeamMemberController::class, 'update'])->name('admin-team-members.update');
     Route::delete('/admin-team-members/{teamMember}', [TeamMemberController::class, 'destroy'])->name('admin-team-members.destroy');
+
+    Route::get('/admin-clients', [ClientController::class, 'index'])->name('admin-clients.index');
+    Route::get('/admin-clients/create', [ClientController::class, 'create'])->name('admin-clients.create');
+    Route::post('/admin-clients', [ClientController::class, 'store'])->name('admin-clients.store');
+    Route::get('/admin-clients/{client}/edit', [ClientController::class, 'edit'])->name('admin-clients.edit');
+    Route::put('/admin-clients/{client}', [ClientController::class, 'update'])->name('admin-clients.update');
+    Route::delete('/admin-clients/{client}', [ClientController::class, 'destroy'])->name('admin-clients.destroy');
 
     Route::get('/admin-portfolios', [PortfolioController::class, 'index'])->name('admin-portfolios.index');
     Route::get('/admin-portfolios/create', [PortfolioController::class, 'create'])->name('admin-portfolios.create');

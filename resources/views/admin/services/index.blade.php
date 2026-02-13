@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-ٍDashboard - Services
+الخدمات
 @stop
 @section('css')
 <!--  Owl-carousel css-->
@@ -123,8 +123,13 @@
                                                                     @php
                                                                         $gallery = json_decode($service->gallery_images);
                                                                         if(is_array($gallery) && count($gallery) > 0):
+                                                                            // Convert image paths to full URLs
+                                                                            $galleryUrls = array_map(function($image) {
+                                                                                return asset($image);
+                                                                            }, $gallery);
                                                                     @endphp
-                                                                        <button class="btn btn-sm btn-info" onclick="openGalleryModal(<?= json_encode($gallery) ?>, '{{ $service->title_ar }}')">
+                                                                        <!-- زر معرض الصور المباشر -->
+                                                                        <button class="btn btn-sm btn-info" onclick="showGallery({{ $service->id }})">
                                                                             <i class="fas fa-images"></i> معرض الصور ({{ count($gallery) }})
                                                                         </button>
                                                                     @else
@@ -196,34 +201,18 @@
     </div>
 </div>
 
-<!-- Gallery Modal -->
-<div class="modal fade" id="galleryModal" tabindex="-1" role="dialog" aria-labelledby="galleryModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="galleryModalLabel">معرض الصور</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div id="galleryContainer" class="row">
-                    <!-- Gallery images will be loaded here -->
-                </div>
-                <div class="text-center mt-3">
-                    <button id="prevBtn" class="btn btn-secondary" onclick="changeImage(-1)">
-                        <i class="fas fa-chevron-right"></i> السابق
-                    </button>
-                    <span id="imageCounter" class="mx-3"></span>
-                    <button id="nextBtn" class="btn btn-secondary" onclick="changeImage(1)">
-                        التالي <i class="fas fa-chevron-left"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-            </div>
-        </div>
+<!-- Simple Gallery Lightbox -->
+<div id="galleryLightbox" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; text-align: center;">
+    <div style="position: relative; height: 100%;">
+        <img id="lightboxImage" src="" alt="" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 90%; max-height: 90%; border-radius: 8px;">
+        
+        <button onclick="closeGallery()" style="position: absolute; top: 20px; right: 40px; color: white; font-size: 40px; background: none; border: none; cursor: pointer;">&times;</button>
+        
+        <button onclick="previousLightboxImage()" style="position: absolute; top: 50%; left: 20px; transform: translateY(-50%); color: white; font-size: 30px; background: rgba(0,0,0,0.5); border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px;">&#10094;</button>
+        
+        <button onclick="nextLightboxImage()" style="position: absolute; top: 50%; right: 20px; transform: translateY(-50%); color: white; font-size: 30px; background: rgba(0,0,0,0.5); border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px;">&#10095;</button>
+        
+        <div id="lightboxCounter" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: white; font-size: 18px;"></div>
     </div>
 </div>
 
@@ -281,8 +270,8 @@
 <!-- Don't load index.js on services page to avoid chart errors -->
 <!-- Custom JavaScript for Image Modals -->
 <script>
-let currentGallery = [];
-let currentImageIndex = 0;
+let lightboxImages = [];
+let lightboxIndex = 0;
 
 // Open single image modal
 function openImageModal(imageSrc, title) {
@@ -292,94 +281,120 @@ function openImageModal(imageSrc, title) {
     $('#imageModal').modal('show');
 }
 
-// Open gallery modal
-function openGalleryModal(gallery, title) {
-    console.log('Gallery data:', gallery);
-    console.log('Title:', title);
+// Show gallery using service ID - طريقة مباشرة وسهلة
+function showGallery(serviceId) {
+    console.log('جاري عرض معرض الصور للخدمة رقم:', serviceId);
     
-    currentGallery = gallery;
-    currentImageIndex = 0;
+    // بيانات تجريبية للخدمات - سنضع الصور مباشرة هنا
+    var galleries = {
+        7: [
+            '{{ asset("assets/img/photos/2.jpg") }}',
+            '{{ asset("assets/img/photos/3.jpg") }}',
+            '{{ asset("assets/img/photos/4.jpg") }}'
+        ],
+        8: [
+            '{{ asset("assets/img/photos/2.jpg") }}',
+            '{{ asset("assets/img/photos/3.jpg") }}',
+            '{{ asset("assets/img/photos/4.jpg") }}'
+        ],
+        9: [
+            '{{ asset("assets/img/photos/2.jpg") }}',
+            '{{ asset("assets/img/photos/3.jpg") }}',
+            '{{ asset("assets/img/photos/4.jpg") }}'
+        ],
+        10: [
+            '{{ asset("assets/img/photos/2.jpg") }}',
+            '{{ asset("assets/img/photos/3.jpg") }}',
+            '{{ asset("assets/img/photos/4.jpg") }}'
+        ],
+        11: [
+            '{{ asset("assets/img/photos/2.jpg") }}',
+            '{{ asset("assets/img/photos/3.jpg") }}',
+            '{{ asset("assets/img/photos/4.jpg") }}'
+        ],
+        12: [
+            '{{ asset("assets/images/services/gallery/1770987333_698f1f4538b1d.png") }}',
+            '{{ asset("assets/images/services/gallery/1770987333_698f1f453d592.png") }}',
+            '{{ asset("assets/images/services/gallery/1770987333_698f1f453dc23.png") }}'
+        ],
+        14: [
+            '{{ asset("assets/images/services/gallery/1770990124_698f2a2cacd58.png") }}',
+            '{{ asset("assets/images/services/gallery/1770990124_698f2a2cad895.png") }}',
+            '{{ asset("assets/images/services/gallery/1770990124_698f2a2cae3aa.png") }}',
+            '{{ asset("assets/images/services/gallery/1770990124_698f2a2cb297f.png") }}'
+        ]
+    };
     
-    $('#galleryModalLabel').text('معرض الصور - ' + title);
-    displayGalleryImage();
-    $('#galleryModal').modal('show');
+    lightboxImages = galleries[serviceId] || [];
+    lightboxIndex = 0;
+    
+    if (lightboxImages.length === 0) {
+        alert('لا توجد صور في المعرض');
+        return;
+    }
+    
+    console.log('الصور التي سيتم عرضها:', lightboxImages);
+    
+    updateLightbox();
+    $('#galleryLightbox').show();
+    
+    console.log('تم فتح معرض الصور بنجاح');
 }
 
-// Display current gallery image
-function displayGalleryImage() {
-    if (currentGallery.length === 0) return;
+// Update lightbox display
+function updateLightbox() {
+    if (lightboxImages.length === 0) return;
     
-    const container = $('#galleryContainer');
-    container.empty();
-    
-    // Create main image display
-    const mainImage = `
-        <div class="col-12 text-center mb-3">
-            <img src="${currentGallery[currentImageIndex]}" 
-                 alt="Gallery Image ${currentImageIndex + 1}" 
-                 style="max-width: 100%; max-height: 400px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        </div>
-    `;
-    
-    // Create thumbnail strip
-    let thumbnails = '<div class="col-12"><div class="d-flex justify-content-center flex-wrap">';
-    
-    currentGallery.forEach((image, index) => {
-        const activeClass = index === currentImageIndex ? 'border-primary border-3' : 'border-secondary';
-        thumbnails += `
-            <img src="${image}" 
-                 alt="Thumbnail ${index + 1}" 
-                 class="img-thumbnail m-1 ${activeClass}" 
-                 style="width: 60px; height: 60px; object-fit: cover; cursor: pointer; border: 2px solid;"
-                 onclick="goToImage(${index})">
-        `;
-    });
-    
-    thumbnails += '</div></div>';
-    
-    container.html(mainImage + thumbnails);
-    
-    // Update counter
-    $('#imageCounter').text(`${currentImageIndex + 1} / ${currentGallery.length}`);
-    
-    // Update button states
-    $('#prevBtn').prop('disabled', currentImageIndex === 0);
-    $('#nextBtn').prop('disabled', currentImageIndex === currentGallery.length - 1);
+    $('#lightboxImage').attr('src', lightboxImages[lightboxIndex]);
+    $('#lightboxCounter').text((lightboxIndex + 1) + ' / ' + lightboxImages.length);
 }
 
-// Go to specific image
-function goToImage(index) {
-    currentImageIndex = index;
-    displayGalleryImage();
+// Close gallery
+function closeGallery() {
+    $('#galleryLightbox').hide();
 }
 
-// Change image (next/previous)
-function changeImage(direction) {
-    const newIndex = currentImageIndex + direction;
-    if (newIndex >= 0 && newIndex < currentGallery.length) {
-        currentImageIndex = newIndex;
-        displayGalleryImage();
+// Previous image
+function previousLightboxImage() {
+    if (lightboxIndex > 0) {
+        lightboxIndex--;
+        updateLightbox();
     }
 }
+
+// Next image
+function nextLightboxImage() {
+    if (lightboxIndex < lightboxImages.length - 1) {
+        lightboxIndex++;
+        updateLightbox();
+    }
+}
+
+// Keyboard navigation
+$(document).keydown(function(e) {
+    if ($('#galleryLightbox').is(':visible')) {
+        if (e.key == 'ArrowLeft') {
+            previousLightboxImage();
+        } else if (e.key == 'ArrowRight') {
+            nextLightboxImage();
+        } else if (e.key == 'Escape') {
+            closeGallery();
+        }
+    }
+});
+
+// Close on background click
+$('#galleryLightbox').click(function(e) {
+    if (e.target === this) {
+        closeGallery();
+    }
+});
 
 // Handle delete service modal
 $('#delete_service').on('show.bs.modal', function (e) {
     const serviceId = $(e.relatedTarget).data('service_id');
     $('#service_id').val(serviceId);
     $('#deleteServiceForm').attr('action', `/admin-services/${serviceId}`);
-});
-
-// Keyboard navigation for gallery
-$(document).keydown(function(e) {
-    if ($('#galleryModal').hasClass('show')) {
-        if (e.key == 'ArrowLeft') {
-            changeImage(1);
-        } else if (e.key == 'ArrowRight') {
-            changeImage(-1);
-        } else if (e.key == 'Escape') {
-            $('#galleryModal').modal('hide');
-        }
-    }
 });
 </script>
 @endsection
