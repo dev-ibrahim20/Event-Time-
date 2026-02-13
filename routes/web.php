@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AdminCareersController;
+use App\Http\Controllers\AdminOffersController;
+use App\Http\Controllers\AdminProductsController;
+use App\Http\Controllers\AdminStaticContentsController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactMessagesController;
 use App\Http\Controllers\HomeController;
@@ -74,6 +78,10 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/admin-dashboard', function () {
+    return view('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('admin-dashboard');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -126,6 +134,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin-papers', [PapersController::class, 'index'])->name('admin-papers.index');
     Route::post('/admin-papers', [PapersController::class, 'update'])->name('admin-papers.update');
     Route::delete('/admin-papers/{papers}', [PapersController::class, 'destroy'])->name('admin-papers.destroy');
+
+    // Offers Routes
+    Route::resource('admin-offers', AdminOffersController::class);
+
+    // Careers Routes
+    Route::resource('admin-careers', AdminCareersController::class);
+
+    // Products Routes
+    Route::resource('admin-products', AdminProductsController::class);
+
+    // Static Contents Routes
+    Route::get('/admin-static-contents', [AdminStaticContentsController::class, 'index'])->name('admin-static-contents.index');
+    Route::post('/admin-static-contents', [AdminStaticContentsController::class, 'update'])->name('admin-static-contents.update');
+    Route::get('/admin-static-contents/create-default', [AdminStaticContentsController::class, 'createDefaultContent'])->name('admin-static-contents.create-default');
 
 });
 

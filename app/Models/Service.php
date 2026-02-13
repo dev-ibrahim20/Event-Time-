@@ -107,4 +107,16 @@ class Service extends Model
     {
         return 'slug';
     }
+    
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
+    
+    public function activeOffers()
+    {
+        return $this->offers()->where('status', true)
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now());
+    }
 }

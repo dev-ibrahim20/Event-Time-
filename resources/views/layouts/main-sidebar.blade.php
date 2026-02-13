@@ -60,6 +60,7 @@
                     </svg><span class="side-menu__label">الخدمات</span><i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     <li><a class="slide-item" href="{{ url('/' . $page = 'admin-services') }}">قائمة الخدمات</a></li>
+                    <li><a class="slide-item" href="{{ route('admin-offers.index') }}">العروض</a></li>
                 </ul>
             </li>
             <li class="side-item side-item-category">الرسائل</li>
@@ -108,15 +109,16 @@
                     <li><a class="slide-item" href="{{ route('admin-papers.index') }}">الأوراق</a></li>
                 </ul>
             </li>
-            <li class="side-item side-item-category">أعضاء الفريق</li>
+            <li class="side-item side-item-category">الفريق والتوظيف</li>
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
-                    </svg><span class="side-menu__label">أعضاء الفريق</span><i class="angle fe fe-chevron-down"></i></a>
+                    </svg><span class="side-menu__label">الفريق والتوظيف</span><i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     <li><a class="slide-item" href="{{ route('admin-team-members.index') }}">أعضاء الفريق</a></li>
+                    <li><a class="slide-item" href="{{ route('admin-careers.index') }}">التوظيف</a></li>
                 </ul>
             </li>
             <li class="side-item side-item-category">العملاء</li>
@@ -159,7 +161,8 @@
                     </svg><span class="side-menu__label">الاعدادات</span><i class="angle fe fe-chevron-down"></i></a>
                 <ul class="slide-menu">
                     <li><a class="slide-item" href="{{ route('admin-social-media.index') }}">السوشيال ميديا</a></li>
-                    <li><a class="slide-item" href="{{ url('/' . $page = '') }}">المنتجات</a></li>
+                    <li><a class="slide-item" href="{{ route('admin-products.index') }}">المنتجات</a></li>
+                    <li><a class="slide-item" href="{{ route('admin-static-contents.index') }}">الثوابت</a></li>
                 </ul>
             </li>
         </ul>
