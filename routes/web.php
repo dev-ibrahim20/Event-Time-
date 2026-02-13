@@ -1,12 +1,15 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactMessagesController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PapersController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteRequestsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SocialMediaController;
+use App\Http\Controllers\TeamMemberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -94,12 +97,27 @@ Route::middleware('auth')->group(function () {
     Route::put('/admin-social-media/{socialMedia}', [SocialMediaController::class, 'update'])->name('admin-social-media.update');
     Route::delete('/admin-social-media/{socialMedia}', [SocialMediaController::class, 'destroy'])->name('admin-social-media.destroy');
 
+    Route::get('/admin-team-members', [TeamMemberController::class, 'index'])->name('admin-team-members.index');
+    Route::get('/admin-team-members/create', [TeamMemberController::class, 'create'])->name('admin-team-members.create');
+    Route::post('/admin-team-members', [TeamMemberController::class, 'store'])->name('admin-team-members.store');
+    Route::get('/admin-team-members/{teamMember}/edit', [TeamMemberController::class, 'edit'])->name('admin-team-members.edit');
+    Route::put('/admin-team-members/{teamMember}', [TeamMemberController::class, 'update'])->name('admin-team-members.update');
+    Route::delete('/admin-team-members/{teamMember}', [TeamMemberController::class, 'destroy'])->name('admin-team-members.destroy');
+
     Route::get('/admin-portfolios', [PortfolioController::class, 'index'])->name('admin-portfolios.index');
     Route::get('/admin-portfolios/create', [PortfolioController::class, 'create'])->name('admin-portfolios.create');
     Route::post('/admin-portfolios', [PortfolioController::class, 'store'])->name('admin-portfolios.store');
     Route::get('/admin-portfolios/{portfolio}/edit', [PortfolioController::class, 'edit'])->name('admin-portfolios.edit');
     Route::put('/admin-portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('admin-portfolios.update');
     Route::delete('/admin-portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('admin-portfolios.destroy');
+
+    Route::get('/admin-about-us', [AboutUsController::class, 'index'])->name('admin-about-us.index');
+    Route::get('/admin-about-us/edit', [AboutUsController::class, 'edit'])->name('admin-about-us.edit');
+    Route::put('/admin-about-us', [AboutUsController::class, 'update'])->name('admin-about-us.update');
+
+    Route::get('/admin-papers', [PapersController::class, 'index'])->name('admin-papers.index');
+    Route::post('/admin-papers', [PapersController::class, 'update'])->name('admin-papers.update');
+    Route::delete('/admin-papers/{papers}', [PapersController::class, 'destroy'])->name('admin-papers.destroy');
 
 });
 
