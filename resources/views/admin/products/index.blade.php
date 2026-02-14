@@ -81,9 +81,9 @@
                                                             <td>{{$loop->iteration}}</td>
                                                             <td>
                                                                 @if($product->image)
-                                                                    <img src="{{ asset($product->image) }}" alt="{{ $product->title_ar }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                                                                    <img src="{{ asset( $product->image) }}" alt="{{ $product->title_ar }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                                                                 @else
-                                                                    <img src="{{ asset('assets/img/placeholder.png') }}" alt="لا توجد صورة" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                                                                    <img src="{{ asset('assets/images/placeholder.png') }}" alt="لا توجد صورة" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                                                                 @endif
                                                             </td>
                                                             <td>

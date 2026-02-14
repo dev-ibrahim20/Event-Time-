@@ -198,6 +198,170 @@
     </div>
 </section>
 
+<!-- Featured Products Section -->
+@if(isset($featuredProducts) && $featuredProducts->count() > 0)
+<section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <div class="inline-flex items-center bg-red-600 text-white px-6 py-3 rounded-full mb-6">
+                <i class="fas fa-star mr-2"></i>
+                <span class="font-bold text-lg">{{ app()->getLocale() == 'ar' ? 'المنتجات المميزة' : 'Featured Products' }}</span>
+                <i class="fas fa-star ml-2"></i>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                {{ app()->getLocale() == 'ar' ? 'اختياراتنا المميزة بعناية' : 'Our Carefully Selected Premium Options' }}
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                {{ app()->getLocale() == 'ar' ? 'اكتشف أفضل منتجاتنا التي تم اختيارها بعناية فائقة لتلبية جميع احتياجات فعالياتكم' : 'Discover our finest products carefully selected with premium quality to meet all your event needs' }}
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($featuredProducts as $product)
+            <div class="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-red-200 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                <!-- Featured Badge -->
+                <div class="absolute -top-3 -right-3 z-10">
+                    <div class="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 rounded-full shadow-lg flex items-center">
+                        <i class="fas fa-star mr-1"></i>
+                        <span class="font-bold text-xs">{{ app()->getLocale() == 'ar' ? 'مميز' : 'Featured' }}</span>
+                    </div>
+                </div>
+                
+                <!-- Product Image -->
+                <div class="relative h-48 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                    @if($product->image)
+                    <img src="{{ asset( $product->image) }}" 
+                         alt="{{ app()->getLocale() == 'ar' ? $product->title_ar : $product->title_en }}" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    @else
+                    <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-50 to-red-100">
+                        <i class="fas fa-crown text-red-300 text-4xl"></i>
+                    </div>
+                    @endif
+                </div>
+                
+                <!-- Product Content -->
+                <div class="p-4">
+                    <!-- Category -->
+                    <div class="mb-3">
+                        @if($product->category_ar || $product->category_en)
+                        <span class="inline-flex items-center px-2 py-1 bg-red-50 text-red-600 text-xs font-medium rounded-lg">
+                            <i class="fas fa-tag mr-1"></i>
+                            {{ app()->getLocale() == 'ar' ? $product->category_ar : $product->category_en }}
+                        </span>
+                        @endif
+                    </div>
+                    
+                    <!-- Title -->
+                    <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
+                        {{ app()->getLocale() == 'ar' ? $product->title_ar : $product->title_en }}
+                    </h3>
+                    
+                    <!-- Price & Rating -->
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="text-xl font-bold text-red-600">
+                            {{ number_format($product->price, 2) }} {{ app()->getLocale() == 'ar' ? 'ريال' : 'SAR' }}
+                        </div>
+                        <div class="flex items-center text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Button -->
+                    <div class="flex space-x-2">
+                        <a href="{{ route('products.show', $product->slug) }}" class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-sm">
+                            <i class="fas fa-eye mr-1"></i>
+                            {{ app()->getLocale() == 'ar' ? 'التفاصيل' : 'Details' }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        
+        <!-- View All Button -->
+        <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="500">
+            <a href="{{ route('products.index') }}" class="inline-flex items-center bg-white text-red-600 px-8 py-4 rounded-2xl border-2 border-red-600 hover:bg-red-600 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-xl font-bold text-lg">
+                <i class="fas fa-th-large mr-3"></i>
+                {{ app()->getLocale() == 'ar' ? 'عرض جميع المنتجات' : 'View All Products' }}
+                <i class="fas fa-arrow-left mr-3"></i>
+            </a>
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- Hero Section -->
+<section class="relative py-20 lg:py-32 bg-gradient-to-br from-red-600 to-red-800 text-white overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+        <img src="https://picsum.photos/seed/event-management/1920/1080.jpg" 
+             alt="Event Management Background" 
+             class="w-full h-full object-cover opacity-20">
+    </div>
+    
+    <!-- Overlay Gradient -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/30"></div>
+    
+    <!-- Decorative Elements -->
+    <div class="absolute top-10 right-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
+    <div class="absolute bottom-10 left-10 w-32 h-32 bg-white opacity-5 rounded-full"></div>
+    <div class="absolute top-1/3 left-1/4 w-16 h-16 bg-white opacity-10 rounded-full"></div>
+    <div class="absolute bottom-1/3 right-1/4 w-24 h-24 bg-white opacity-5 rounded-full"></div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center" data-aos="fade-up">
+            <div class="inline-flex items-center bg-white/20 backdrop-blur-md px-6 py-3 rounded-full mb-8 border border-white/30">
+                <i class="fas fa-calendar-star mr-2"></i>
+                <span class="font-medium text-lg">{{ app()->getLocale() == 'ar' ? 'شريككم في تنظيم الفعاليات المميزة' : 'Your Partner in Exceptional Events' }}</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                {{ app()->getLocale() == 'ar' ? 'نحول أفكاركم إلى فعاليات لا تُنسى' : 'We Transform Your Ideas into Unforgettable Events' }}
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-red-100 max-w-4xl mx-auto leading-relaxed mb-12">
+                {{ app()->getLocale() == 'ar' ? 'منظمتكم المتخصصة في تنظيم وتجهيز الفعاليات والمؤتمرات والحفلات بأعلى معايير الجودة والاحترافية' : 'Your specialized organization in event management, conferences, and parties with the highest standards of quality and professionalism' }}
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <a href="{{ route('quote') }}" class="bg-white text-red-600 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center">
+                    <i class="fas fa-file-invoice mr-3"></i>
+                    {{ app()->getLocale() == 'ar' ? 'اطلب عرض سعر الآن' : 'Request Quote Now' }}
+                </a>
+                <a href="{{ route('products.index') }}" class="bg-transparent text-white px-8 py-4 rounded-xl text-lg font-bold border-2 border-white hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105 flex items-center">
+                    <i class="fas fa-shopping-bag mr-3"></i>
+                    {{ app()->getLocale() == 'ar' ? 'استكشف منتجاتنا' : 'Explore Our Products' }}
+                </a>
+            </div>
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-bold text-white mb-2">500+</div>
+                <div class="text-red-100 font-medium">{{ app()->getLocale() == 'ar' ? 'فعالية ناجحة' : 'Successful Events' }}</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-bold text-white mb-2">50+</div>
+                <div class="text-red-100 font-medium">{{ app()->getLocale() == 'ar' ? 'منتج مميز' : 'Premium Products' }}</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-bold text-white mb-2">100%</div>
+                <div class="text-red-100 font-medium">{{ app()->getLocale() == 'ar' ? 'رضا العملاء' : 'Client Satisfaction' }}</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-bold text-white mb-2">24/7</div>
+                <div class="text-red-100 font-medium">{{ app()->getLocale() == 'ar' ? 'دعم فني' : 'Technical Support' }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="py-20 bg-gradient-to-r from-red-600 to-red-800 text-white">
     <div class="container mx-auto px-4 text-center">

@@ -49,13 +49,19 @@ class StaticContent extends Model
     public static function getValue($key, $default = null)
     {
         $content = static::where('key', $key)->first();
-        return $content ? $content->getValue() : $default;
+        if ($content) {
+            return app()->getLocale() === 'ar' ? $content->value_ar : $content->value_en;
+        }
+        return $default;
     }
 
     public static function getDescription($key, $default = null)
     {
         $content = static::where('key', $key)->first();
-        return $content ? $content->getDescription() : $default;
+        if ($content) {
+            return app()->getLocale() === 'ar' ? $content->description_ar : $content->description_en;
+        }
+        return $default;
     }
 
     public static function getHomeImage()

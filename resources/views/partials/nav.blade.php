@@ -20,6 +20,7 @@
                     <a href=""></a>
                 @endif
                 <a href="{{ route('services') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'خدماتنا' : 'Our Services' }}</a>
+                <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'منتجتنا' : 'Our Products' }}</a>
                 <a href="{{ route('gallery') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'معرض الأعمال' : 'Gallery' }}</a>
                 <a href="{{ route('about') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'من نحن' : 'About Us' }}</a>
                 <a href="{{ route('contact') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'اتصل بنا' : 'Contact Us' }}</a>
@@ -64,6 +65,7 @@
         <div class="container mx-auto px-4 py-4 space-y-3">
             <a href="{{ route('home') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'الرئيسية' : 'Home' }}</a>
             <a href="{{ route('services') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'خدماتنا' : 'Our Services' }}</a>
+            <a href="{{ route('products.index') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'منتجتنا' : 'Our Products' }}</a>
             <a href="{{ route('gallery') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'معرض الأعمال' : 'Gallery' }}</a>
             <a href="{{ route('about') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'من نحن' : 'About Us' }}</a>
             <a href="{{ route('contact') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2">{{ app()->getLocale() == 'ar' ? 'اتصل بنا' : 'Contact Us' }}</a>

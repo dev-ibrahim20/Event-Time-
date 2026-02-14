@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -14,6 +15,7 @@ class Product extends Model
         'title_en',
         'description_ar',
         'description_en',
+        'slug',
         'image',
         'price',
         'category_ar',
@@ -28,6 +30,23 @@ class Product extends Model
         'featured' => 'boolean',
         'status' => 'boolean',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($product) {
+            if (empty($product->slug)) {
+                $product->slug = Str::slug($product->title_en);
+            }
+        });
+
+        static::updating(function ($product) {
+            if (empty($product->slug)) {
+                $product->slug = Str::slug($product->title_en);
+            }
+        });
+    }
 
     public function getTitleAttribute()
     {

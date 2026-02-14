@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminProductsController;
 use App\Http\Controllers\AdminStaticContentsController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactMessagesController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontendProductsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PapersController;
 use App\Http\Controllers\PortfolioController;
@@ -67,6 +69,9 @@ Route::get('language/{locale}', function ($locale) {
 
     Route::post('api/quote-request', [QuoteRequestsController::class, 'store']);
 
+    // Products Routes
+    Route::get('products', [FrontendProductsController::class, 'index'])->name('products.index');
+    Route::get('products/{slug}', [FrontendProductsController::class, 'show'])->name('products.show');
 
 
 
@@ -74,13 +79,10 @@ Route::get('language/{locale}', function ($locale) {
 
 
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/admin-dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth', 'verified'])->name('admin-dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/admin-dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('admin-dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
