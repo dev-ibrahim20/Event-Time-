@@ -327,4 +327,7 @@
         </div>
     </div>
 </section>
+
+@include('partials.clients-simple')
+
 @endsection

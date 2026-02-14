@@ -316,10 +316,5 @@
     </div>
 </section>
 
-<script>
-// Load More Function
-function loadMoreGallery() {
-    showNotification('{{ app()->getLocale() == 'ar' ? 'سيتم إضافة المزيد من المشاريع قريباً' : 'More projects will be added soon' }}', 'info');
-}
-</script>
+@include('partials.clients-simple')
 @endsection

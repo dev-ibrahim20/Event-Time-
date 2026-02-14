@@ -483,4 +483,7 @@ window.loadMap = function() {
     `;
 };
 </script>
+
+@include('partials.clients-simple')
+
 @endsection

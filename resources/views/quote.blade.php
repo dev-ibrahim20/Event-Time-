@@ -313,6 +313,8 @@
     </div>
 </section>
 
+<!-- Clients Slider Section -->
+
 <script>
 // Service Type Selection
 document.querySelectorAll('input[name="service_type"]').forEach(radio => {

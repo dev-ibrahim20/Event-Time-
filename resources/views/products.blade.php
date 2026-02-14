@@ -137,7 +137,7 @@
     <div class="container mx-auto px-4">
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- Filters Sidebar -->
-            <div class="lg:w-1/4">
+            <aside class="lg:w-1/4">
                 <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-24 border border-gray-100">
                     <div class="flex items-center mb-6">
                         <i class="fas fa-filter text-red-600 mr-3"></i>
@@ -228,10 +228,10 @@
                         {{ app()->getLocale() == 'ar' ? 'مسح الفلاتر' : 'Clear Filters' }}
                     </a>
                 </div>
-            </div>
+            </aside>
             
             <!-- Products Grid -->
-            <div class="lg:w-3/4">
+            <main class="lg:w-3/4">
                 <!-- Results Header -->
                 <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100">
                     <div class="flex items-center justify-between">
@@ -239,6 +239,19 @@
                             <h2 class="text-3xl font-bold text-gray-900 mb-2">
                                 {{ app()->getLocale() == 'ar' ? 'جميع المنتجات' : 'All Products' }}
                             </h2>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-box text-red-500 mr-2"></i>
+                                <span class="text-lg">{{ $products->total() }} {{ app()->getLocale() == 'ar' ? 'منتج متاح' : 'products available' }}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-3 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors">
+                                <i class="fas fa-th-large text-gray-600"></i>
+                            </button>
+                            <button class="p-3 rounded-xl bg-gray-100 hover:bg-gray-200 transition-colors">
+                                <i class="fas fa-list text-gray-600"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -334,11 +347,11 @@
                     </div>
                 </div>
                 @endif
-            </div>
+            </main>
         </div>
     </div>
 </section>
-
+<!-- Clients Section -->
 <!-- CTA Section -->
 <section class="py-20 bg-gradient-to-r from-red-600 to-red-800 text-white">
     <div class="container mx-auto px-4 text-center">
@@ -358,4 +371,7 @@
         </div>
     </div>
 </section>
+
+@include('partials.clients-simple')
+
 @endsection
