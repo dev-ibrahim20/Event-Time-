@@ -1,7 +1,30 @@
 @extends('layouts.app')
 @section('title')
-Dashboard - Portfolio
+معرض الاعمال
 @stop
+
+<style>
+.portfolio-thumbnail {
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.portfolio-thumbnail:hover {
+    border-color: #007bff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.no-image-placeholder {
+    border: 2px dashed #ddd;
+    transition: all 0.3s ease;
+}
+
+.no-image-placeholder:hover {
+    border-color: #007bff;
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+}
+</style>
 @section('page-header')
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
@@ -53,7 +76,7 @@ Dashboard - Portfolio
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">الصورة</th>
+                                    <th class="border-bottom-0">المرفق</th>
                                     <th class="border-bottom-0">العنوان</th>
                                     <th class="border-bottom-0">العميل</th>
                                     <th class="border-bottom-0">التاريخ</th>
@@ -68,22 +91,20 @@ Dashboard - Portfolio
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            @if($portfolio->images && count($portfolio->images) > 0)
-                                                <div class="d-flex flex-wrap gap-1">
-                                                    @foreach ($portfolio->images as $index => $image)
-                                                        <button type="button" class="btn btn-sm btn-light border-0 p-1" 
-                                                                onclick="openPortfolioModal('{{ $portfolio->id }}', {{ $index }})"
-                                                                title="{{ $portfolio->title }} - Image {{ $index + 1 }}">
-                                                            <img src="{{ asset('storage/' . $image) }}" alt="{{ $portfolio->title }} - Image {{ $index + 1 }}" 
-                                                             style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px; cursor: pointer;"
-                                                             onclick="openPortfolioModal('{{ $portfolio->id }}', {{ $index }})">
-                                                        </button>
-                                                    @endforeach
+                                            @if($portfolio->images)
+                                                <div class="image-preview-container">
+                                                    <img src="{{ asset('storage/' . $portfolio->images) }}" 
+                                                         alt="{{ $portfolio->title }}" 
+                                                         class="portfolio-thumbnail"
+                                                         style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;"
+                                                         onclick="openPortfolioModal('{{ $portfolio->id }}', 0)"
+                                                         onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'"
+                                                         onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'">
                                                 </div>
-                                            @else
-                                                <div class="bg-gray-200 d-flex align-items-center justify-content-center" 
-                                                             style="width: 40px; height: 40px; border-radius: 4px;">
-                                                    <i class="fas fa-image text-gray-400"></i>
+                                            @elseif($portfolio->videos)
+                                                <div class="no-image-placeholder" 
+                                                     style="width: 80px; height: 80px; border-radius: 8px; background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                                                     <video src="{{ asset('storage/' . $portfolio->videos) }}" controls style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;"></video>
                                                 </div>
                                             @endif
                                         </td>
@@ -125,8 +146,7 @@ Dashboard - Portfolio
                                                     <a class="dropdown-item" href="{{ route('admin-portfolios.edit', $portfolio->id) }}">
                                                         <i class="fas fa-edit text-primary"></i> تعديل
                                                     </a>
-                                                    <a class="dropdown-item" href="#" data-portfolio_id="{{ $portfolio->id }}"
-                                                        data-toggle="modal" data-target="#deletePortfolioModal">
+                                                    <a class="dropdown-item" href="#" onclick="deletePortfolio({{ $portfolio->id }}); return false;" data-portfolio_id="{{ $portfolio->id }}">
                                                         <i class="fas fa-trash text-danger"></i> حذف
                                                     </a>
                                                 </div>
@@ -155,17 +175,12 @@ Dashboard - Portfolio
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin-portfolios.destroy', ':id') }}" method="post" id="deletePortfolioForm">
-                    @csrf
-                    @method('DELETE')
-                    <input type="hidden" name="portfolio_id" id="portfolio_id" value="">
-                    <p>هل أنت متأكد من حذف هذا العمل؟</p>
-                    <p class="text-muted">هذا الإجراء لا يمكن التراجع عنه.</p>
-                </form>
+                <p>هل أنت متأكد من حذف هذا العمل؟</p>
+                <p class="text-muted">هذا الإجراء لا يمكن التراجع عنه.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-                <button type="submit" form="deletePortfolioForm" class="btn btn-danger">حذف</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">حذف</button>
             </div>
         </div>
     </div>
@@ -253,13 +268,11 @@ function openPortfolioModal(portfolioId, imageIndex = 0) {
     
     if (selectedPortfolio && selectedPortfolio.images && selectedPortfolio.images.length > 0) {
         currentPortfolioImages = selectedPortfolio.images;
-        currentImageIndex = imageIndex;
+        currentImageIndex = 0; // Always start with first image
         
-        // Show navigation buttons if more than one image
-        if (selectedPortfolio.images.length > 1) {
-            document.getElementById('prevImageBtn').style.display = 'block';
-            document.getElementById('nextImageBtn').style.display = 'block';
-        }
+        // Hide navigation buttons since we only show one image
+        document.getElementById('prevImageBtn').style.display = 'none';
+        document.getElementById('nextImageBtn').style.display = 'none';
         
         updateMainImage();
         loadThumbnails();
@@ -297,71 +310,43 @@ function loadThumbnails() {
     const container = document.getElementById('portfolioImagesContainer');
     container.innerHTML = '';
     
-    currentPortfolioImages.forEach((image, index) => {
+    // Only show the first image
+    if (currentPortfolioImages.length > 0) {
+        const image = currentPortfolioImages[0];
         const imageHtml = `
-            <div class="col-md-3 mb-3">
-                <img src="${asset('storage/' + image)}" alt="Portfolio Image ${index + 1}" 
-                     class="img-fluid rounded ${index === currentImageIndex ? 'border-primary' : ''}" 
-                     style="max-height: 100px; object-fit: cover; cursor: pointer;"
-                     onclick="openPortfolioModal('${currentPortfolioImages.find(p => p.images.includes(image)).id}', ${index})">
+            <div class="col-md-12 mb-3 text-center">
+                <img src="${asset('storage/' + image)}" alt="Portfolio Image" 
+                     class="img-fluid rounded border-primary" 
+                     style="max-height: 400px; object-fit: contain;">
             </div>
         `;
         container.innerHTML += imageHtml;
-    });
-}
-
-// Delete portfolio function
-function deletePortfolio(portfolioId) {
-    if (confirm('هل أنت متأكد من حذف هذا العمل؟')) {
-        $.ajax({
-            url: `{{ route('admin-portfolios.destroy', ':id') }}`.replace(':id', portfolioId),
-            method: 'POST',
-            data: {
-                '_token': '{{ csrf_token() }}',
-                '_method': 'DELETE'
-            },
-            success: function(response) {
-                console.log('Delete successful:', response);
-                
-                // Show success notification
-                notif({
-                    msg: "تم حذف العمل بنجاح",
-                    type: "success"
-                });
-                
-                // Reload page after a short delay
-                setTimeout(function() {
-                    location.reload();
-                }, 1000);
-            },
-            error: function(xhr) {
-                console.log('Delete error:', xhr);
-                // Show error notification
-                notif({
-                    msg: "حدث خطأ أثناء الحذف",
-                    type: "error"
-                });
-            }
-        });
     }
 }
 
-// Handle delete portfolio form submission
-$('form[action*="/admin-portfolios/"]').on('submit', function(e) {
-    e.preventDefault();
-    
-    const form = $(this);
-    const url = form.attr('action');
-    
-    console.log('Submitting delete form to:', url);
-    console.log('Form data:', form.serialize());
+// Delete portfolio function
+let currentPortfolioId = null;
+
+function deletePortfolio(portfolioId) {
+    currentPortfolioId = portfolioId;
+    $('#deletePortfolioModal').modal('show');
+}
+
+function confirmDelete() {
+    if (!currentPortfolioId) return;
     
     $.ajax({
-        url: url,
+        url: `{{ route('admin-portfolios.destroy', ':id') }}`.replace(':id', currentPortfolioId),
         method: 'POST',
-        data: form.serialize(),
+        data: {
+            '_token': '{{ csrf_token() }}',
+            '_method': 'DELETE'
+        },
         success: function(response) {
             console.log('Delete successful:', response);
+            
+            // Close modal
+            $('#deletePortfolioModal').modal('hide');
             
             // Show success notification
             notif({
@@ -369,10 +354,29 @@ $('form[action*="/admin-portfolios/"]').on('submit', function(e) {
                 type: "success"
             });
             
-            // Reload page after a short delay
-            setTimeout(function() {
-                location.reload();
-            }, 1000);
+            // Remove the deleted row from table immediately
+            const row = $(`tr:has([data-portfolio_id="${currentPortfolioId}"])`);
+            row.fadeOut(500, function() {
+                $(this).remove();
+                
+                // Check if table is empty and show message
+                const remainingRows = $('tbody tr').length;
+                if (remainingRows === 0) {
+                    $('tbody').html(`
+                        <tr>
+                            <td colspan="8" class="text-center py-4">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle"></i>
+                                    لا توجد أعمال حالياً
+                                </div>
+                            </td>
+                        </tr>
+                    `);
+                }
+            });
+            
+            // Reset currentPortfolioId
+            currentPortfolioId = null;
         },
         error: function(xhr) {
             console.log('Delete error:', xhr);
@@ -383,5 +387,15 @@ $('form[action*="/admin-portfolios/"]').on('submit', function(e) {
             });
         }
     });
+}
+
+// Handle modal trigger for delete
+$('#deletePortfolioModal').on('show.bs.modal', function(e) {
+    // This event is now handled by the onclick function
+});
+
+$(document).ready(function() {
+    // Initialize tooltips and other components
+    $('[data-toggle="tooltip"]').tooltip();
 });
 </script>

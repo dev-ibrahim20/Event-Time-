@@ -19,252 +19,190 @@
     </div>
 </section>
 
-<!-- Filter Section -->
-<section class="sticky top-20 z-40 bg-white shadow-md border-b">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-wrap justify-center items-center py-4" x-data="{ activeFilter: 'all' }">
-            <div class="flex flex-wrap gap-2 justify-center">
-                <button @click="activeFilter = 'all'" 
-                        :class="activeFilter === 'all' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'"
-                        class="px-6 py-2 rounded-full font-medium transition-all duration-300">
-                    <i class="fas fa-th ml-2"></i>{{ app()->getLocale() == 'ar' ? 'الكل' : 'All' }}
-                </button>
-                <button @click="activeFilter = 'tents'" 
-                        :class="activeFilter === 'tents' ? 'bg-red-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'"
-                        class="px-6 py-2 rounded-full font-medium transition-all duration-300">
-                    <i class="fas fa-campground ml-2"></i>{{ app()->getLocale() == 'ar' ? 'الخيام الأوروبية' : 'European Tents' }}
-                </button>
-                <button @click="activeFilter = 'conferences'" 
-                        :class="activeFilter === 'conferences' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'"
-                        class="px-6 py-2 rounded-full font-medium transition-all duration-300">
-                    <i class="fas fa-users ml-2"></i>{{ app()->getLocale() == 'ar' ? 'المؤتمرات' : 'Conferences' }}
-                </button>
-                <button @click="activeFilter = 'exhibitions'" 
-                        :class="activeFilter === 'exhibitions' ? 'bg-green-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'"
-                        class="px-6 py-2 rounded-full font-medium transition-all duration-300">
-                    <i class="fas fa-store ml-2"></i>{{ app()->getLocale() == 'ar' ? 'المعارض' : 'Exhibitions' }}
-                </button>
-                <button @click="activeFilter = 'events'" 
-                        :class="activeFilter === 'events' ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'"
-                        class="px-6 py-2 rounded-full font-medium transition-all duration-300">
-                    <i class="fas fa-glass-cheers ml-2"></i>{{ app()->getLocale() == 'ar' ? 'الحفلات' : 'Events' }}
-                </button>
-                <button @click="activeFilter = 'videos'" 
-                        :class="activeFilter === 'videos' ? 'bg-orange-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'"
-                        class="px-6 py-2 rounded-full font-medium transition-all duration-300">
-                    <i class="fas fa-video ml-2"></i>{{ app()->getLocale() == 'ar' ? 'الفيديوهات' : 'Videos' }}
-                </button>
+
+
+
+    <!-- Filter Section -->
+    <section class="bg-white shadow-md border-b">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center items-center py-4">
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button id="btn-all" 
+                            class="px-6 py-2 rounded-full font-medium transition-all duration-300 bg-red-600 text-white">
+                        <i class="fas fa-th ml-2"></i>{{ app()->getLocale() == 'ar' ? 'الكل' : 'All' }}
+                    </button>
+                    <button id="btn-images" 
+                            class="px-6 py-2 rounded-full font-medium transition-all duration-300 bg-gray-200 text-gray-700 hover:bg-gray-300">
+                        <i class="fas fa-image ml-2"></i>{{ app()->getLocale() == 'ar' ? 'الصور' : 'Images' }}
+                    </button>
+                    <button id="btn-videos" 
+                            class="px-6 py-2 rounded-full font-medium transition-all duration-300 bg-gray-200 text-gray-700 hover:bg-gray-300">
+                        <i class="fas fa-video ml-2"></i>{{ app()->getLocale() == 'ar' ? 'الفيديوهات' : 'Videos' }}
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Gallery Grid -->
-<section class="py-16 bg-gray-50">
+<!-- Media Gallery Section -->
+<section class="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
     <div class="container mx-auto px-4">
-        <div class="gallery-grid" x-data="{ activeFilter: 'all' }">
-            
-            <!-- Featured Projects -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3" data-aos="fade-up">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ app()->getLocale() == 'ar' ? 'المشاريع المميزة' : 'Featured Projects' }}</h2>
+        
+        <!-- Images Section -->
+        <div class="relative">
+            <!-- Section Header -->
+            <div class="w-auto text-right mb-12" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-xl font-bold text-gray-900">
+                    <span class="text-blue-600">
+                        <i class="fas fa-image ml-2"></i>
+                        {{ app()->getLocale() == 'ar' ? 'صور' : 'Images' }}
+                    </span>
+                </h2>
             </div>
             
-            <!-- Featured Project 1 - Large -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-2 gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'tents' ? 'block' : 'hidden'"
+            <!-- Images Gallery -->
+            <div id="images-gallery" 
+                 class="gallery-items"
                  data-aos="fade-up" data-aos-delay="100">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/tents/featured1.jpg') }}')">
-                    <img src="{{ asset('assets/images/tents/featured1.jpg') }}" 
-                         alt="Featured Tent Project" 
-                         class="w-full h-96 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <span class="bg-red-600 px-3 py-1 rounded-full text-xs font-bold mb-2 inline-block">
-                                {{ app()->getLocale() == 'ar' ? 'الخيام الأوروبية' : 'European Tents' }}
-                            </span>
-                            <h3 class="text-xl font-bold mb-2">{{ app()->getLocale() == 'ar' ? 'مؤتمر القمة العربية 2024' : 'Conference of the Arab Summit 2024' }}</h3>
-                            <p class="text-sm text-gray-200">{{ app()->getLocale() == 'ar' ? 'خيمة رئيسية بمساحة 2000م للقمة العربية' : 'Main tent with an area of 2000m for the Arab Summit' }}</p>
+                @php
+                    $projects = \App\Models\Portfolio::where('is_active', true)->get();
+                @endphp
+                @if($projects->count() > 0)
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        @foreach($projects as $project)
+                            @if($project->images)
+                            <div class="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" 
+                                 onclick="openLightbox('{{ asset('storage/' . $project->images) }}', '{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}', '{{ app()->getLocale() == 'ar' ? $project->description_ar : $project->description_en }}')">
+                                <!-- Image Container -->
+                                <div class="relative w-full h-40 overflow-hidden rounded-lg shadow-md border border-gray-200">
+                                    <img src="{{ asset('storage/' . $project->images) }}" 
+                                         alt="{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}" 
+                                         class="w-full h-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:brightness-90">
+                                    
+                                    <!-- Overlay -->
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    
+                                    <!-- Search Icon -->
+                                    <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                        <div class="bg-white/90 backdrop-blur-sm text-gray-800 p-2 rounded-full shadow-md">
+                                            <i class="fas fa-search-plus text-sm"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Title -->
+                                    <div class="absolute bottom-0 left-0 right-0 p-2 text-white transform transition-all duration-300 group-hover:translate-y-0">
+                                        <h4 class="text-xs font-bold truncate">
+                                            {{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                        @endforeach
+                    </div>
+                @else
+                    <div class="text-center py-16 bg-white rounded-2xl shadow-lg border border-gray-200">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full mb-6 shadow-lg">
+                            <i class="fas fa-image text-blue-400 text-3xl"></i>
                         </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">
+                            {{ app()->getLocale() == 'ar' ? 'لا توجد صور حالياً' : 'No images available' }}
+                        </h3>
+                        <p class="text-gray-600">
+                            {{ app()->getLocale() == 'ar' ? 'سيتم إضافة الصور قريباً' : 'Images will be added soon' }}
+                        </p>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Featured Project 2 -->
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'conferences' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="200">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/conferences/featured1.jpg') }}')">
-                    <img src="{{ asset('assets/images/conferences/featured1.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'مشروع مؤتمر مميز' : 'Featured Conference Project' }}" 
-                         class="w-full h-96 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
-                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <span class="bg-blue-600 px-3 py-1 rounded-full text-xs font-bold mb-2 inline-block">
-                                {{ app()->getLocale() == 'ar' ? 'المؤتمرات' : 'Conferences' }}
-                            </span>
-                            <h3 class="text-lg font-bold">{{ app()->getLocale() == 'ar' ? 'مؤتمر التقنية الدولي' : 'International Technology Conference' }}</h3>
-                            <p class="text-sm text-gray-200">{{ app()->getLocale() == 'ar' ? 'تجهيز كامل بشاشات LED' : 'Complete setup with LED screens' }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Regular Gallery Items -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 mt-12" data-aos="fade-up">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ app()->getLocale() == 'ar' ? 'جميع المشاريع' : 'All Projects' }}</h2>
-            </div>
-            
-            <!-- Tents Gallery -->
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'tents' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="300">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/tents/tent1.jpg') }}')">
-                    <img src="{{ asset('assets/images/tents/tent1.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'خيمة أوروبية 1' : 'European Tent 1' }}" 
-                         class="w-full h-64 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'tents' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="400">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/tents/tent2.jpg') }}')">
-                    <img src="{{ asset('assets/images/tents/tent2.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'خيمة أوروبية 2' : 'European Tent 2' }}" 
-                         class="w-full h-64 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'tents' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="500">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/tents/tent3.jpg') }}')">
-                    <img src="{{ asset('assets/images/tents/tent3.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'خيمة أوروبية 3' : 'European Tent 3' }}" 
-                         class="w-full h-64 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Conferences Gallery -->
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'conferences' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="600">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/conferences/conf1.jpg') }}')">
-                    <img src="{{ asset('assets/images/conferences/conf1.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'مؤتمر 1' : 'Conference 1' }}" 
-                         class="w-full h-64 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'conferences' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="700">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/conferences/conf2.jpg') }}')">
-                    <img src="{{ asset('assets/images/conferences/conf2.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'مؤتمر 2' : 'Conference 2' }}" 
-                         class="w-full h-64 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Exhibitions Gallery -->
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'exhibitions' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="800">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/exhibitions/stand1.jpg') }}')">
-                    <img src="{{ asset('assets/images/exhibitions/stand1.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'جناح معرض 1' : 'Exhibition Stand 1' }}" 
-                         class="w-full h-64 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'exhibitions' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="900">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/exhibitions/stand2.jpg') }}')">
-                    <img src="{{ asset('assets/images/exhibitions/stand2.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'جناح معرض 2' : 'Exhibition Stand 2' }}" 
-                         class="w-full h-64 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Events Gallery -->
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'events' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="1000">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/events/event1.jpg') }}')">
-                    <img src="{{ asset('assets/images/events/event1.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'حفلة 1' : 'Event 1' }}" 
-                         class="w-full h-64 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'events' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="1100">
-                <div class="relative group cursor-pointer" onclick="openLightbox('{{ asset('assets/images/events/event2.jpg') }}')">
-                    <img src="{{ asset('assets/images/events/event2.jpg') }}" 
-                         alt="{{ app()->getLocale() == 'ar' ? 'حفلة 2' : 'Event 2' }}" 
-                         class="w-full h-64 object-cover rounded-lg shadow-lg">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Videos Section -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 mt-12" 
-                 :class="activeFilter === 'all' || activeFilter === 'videos' ? 'block' : 'hidden'"
-                 data-aos="fade-up">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ app()->getLocale() == 'ar' ? 'الفيديوهات' : 'Videos' }}</h2>
-            </div>
-            
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 gallery-item" 
-                 :class="activeFilter === 'all' || activeFilter === 'videos' ? 'block' : 'hidden'"
-                 data-aos="fade-up" data-aos-delay="1200">
-                <div class="relative group cursor-pointer rounded-lg shadow-lg overflow-hidden">
-                    <video class="w-full h-96 object-cover" controls poster="{{ asset('assets/videos/video1-poster.jpg') }}">
-                        <source src="{{ asset('assets/videos/project1.mp4') }}" type="video/mp4">
-                        {{ app()->getLocale() == 'ar' ? 'متصفحك لا يدعم تشغيل الفيديو' : 'Your browser does not support video playback' }}
-                    </video>
-                    <div class="absolute top-4 left-4 bg-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                        {{ app()->getLocale() == 'ar' ? 'فيديو' : 'Video' }}
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Load More Button -->
-<section class="py-12 bg-white">
-    <div class="container mx-auto px-4 text-center">
-        <button onclick="loadMoreGallery()" class="bg-red-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition-colors transform hover:scale-105">
-            <i class="fas fa-plus ml-2"></i>{{ app()->getLocale() == 'ar' ? 'تحميل المزيد' : 'Load More' }}
-        </button>
+        
+        <!-- Divider -->
+        <div class="relative mb-16">
+            <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center">
+                <span class="bg-gradient-to-r from-gray-50 to-white px-6 text-gray-500 text-sm font-medium">
+                    {{ app()->getLocale() == 'ar' ? 'أو' : 'OR' }}
+                </span>
+            </div>
+        </div>
+        
+        <!-- Videos Section -->
+        <div class="flex justify-start">
+            <!-- Section Header -->
+            <div class="w-auto text-right mb-12" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="text-xl font-bold text-gray-900">
+                    <span class="text-purple-600">
+                        <i class="fas fa-video mr-2"></i>
+                        {{ app()->getLocale() == 'ar' ? 'فيديوهات' : 'Videos' }}
+                    </span>
+                </h2>
+            </div>
+            
+            <!-- Videos Gallery -->
+            <div id="videos-gallery"
+                 class="gallery-items"
+                 data-aos="fade-up" data-aos-delay="300">
+                @php
+                    $projects = \App\Models\Portfolio::where('is_active', true)->get();
+                @endphp
+                @if($projects->count() > 0)
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        @foreach($projects as $project)
+                            @if($project->videos)
+                            <div class="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" 
+                                 onclick="openVideoLightbox('{{ asset('storage/' . $project->videos) }}', '{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}')">
+                                <!-- Video Container -->
+                                <div class="relative w-full h-40 overflow-hidden rounded-lg shadow-md border border-gray-200 bg-black">
+                                    <video class="w-full h-full object-cover" 
+                                           poster="{{ asset('storage/' . $project->videos) }}"
+                                           controls>
+                                        <source src="{{ asset('storage/' . $project->videos) }}" type="video/mp4">
+                                        {{ app()->getLocale() == 'ar' ? 'متصفحك لا يدعم تشغيل الفيديو' : 'Your browser does not support video playback' }}
+                                    </video>
+                                    
+                                    <!-- Video Badge -->
+                                    <div class="absolute top-2 left-2">
+                                        <span class="inline-flex items-center bg-purple-600 text-white px-2 py-0.5 rounded-full text-xs font-bold">
+                                            <i class="fas fa-video mr-1"></i>
+                                            {{ app()->getLocale() == 'ar' ? 'فيديو' : 'Video' }}
+                                        </span>
+                                    </div>
+                                    
+                                    <!-- Play Button -->
+                                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <div class="bg-white/90 backdrop-blur-sm text-purple-800 p-2 rounded-full shadow-md">
+                                            <i class="fas fa-play text-xs ml-0.5"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Title -->
+                                    <div class="absolute bottom-0 left-0 right-0 p-2 text-white transform transition-all duration-300 group-hover:translate-y-0">
+                                        <h4 class="text-xs font-bold truncate">
+                                            {{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                        @endforeach
+                    </div>
+                @else
+                    <div class="text-center py-16 bg-white rounded-2xl shadow-lg border border-gray-200">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-50 to-purple-100 rounded-full mb-6 shadow-lg">
+                            <i class="fas fa-video text-purple-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">
+                            {{ app()->getLocale() == 'ar' ? 'لا توجد فيديوهات حالياً' : 'No videos available' }}
+                        </h3>
+                        <p class="text-gray-600">
+                            {{ app()->getLocale() == 'ar' ? 'سيتم إضافة الفيديوهات قريباً' : 'Videos will be added soon' }}
+                        </p>
+                    </div>
+                @endif
+            </div>
+        </div>
     </div>
 </section>
 

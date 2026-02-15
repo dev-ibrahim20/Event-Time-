@@ -1,4 +1,4 @@
-<nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 transition-all duration-300" x-data="{ isOpen: false, isScrolled: false }" x-init="window.addEventListener('scroll', () => { isScrolled = window.pageYOffset > 50 })">
+<nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 transition-all duration-300" x-data="{ isOpen: false }">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center h-20">
             <!-- Logo -->

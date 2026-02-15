@@ -19,6 +19,7 @@ class Portfolio extends Model
         'project_date',
         'location',
         'images',
+        'videos',
         'service_id',
         'is_featured',
         'is_active',

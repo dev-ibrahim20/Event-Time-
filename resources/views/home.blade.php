@@ -38,10 +38,11 @@
 <section class="relative h-screen flex items-center justify-center overflow-hidden">
     <!-- Background Video/Image -->
     <div class="hero-video">
-        <video autoplay muted loop playsinline class="w-full h-full object-cover">
+        {{-- <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <source src="{{ asset('assets/videos/events-hero.mp4') }}" type="video/mp4">
             <source src="{{ asset('assets/videos/hero-video.mp4') }}" type="video/mp4">
-            <img src="{{ asset('assets/images/hero-bg.jpg') }}" alt="وقت الحدث" class="w-full h-full object-cover">
-        </video>
+        </video> --}}
+        <img src="{{ asset('assets/images/11.jpeg') }}" alt="وقت الحدث" class="w-full h-full object-cover">
     </div>
     <div class="hero-overlay"></div>
     
@@ -138,63 +139,56 @@
             </p>
         </div>
         
+        @php
+            try {
+                $services = \App\Models\Service::where('featured', true)
+                    ->orderBy('sort_order')
+                    ->get();
+            } catch (\Exception $e) {
+                $services = collect();
+            }
+        @endphp
+        
+        @if($services->count() > 0)
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Service 1 -->
-            <div class="luxury-card bg-white rounded-xl shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="100">
+            @foreach($services as $index => $service)
+            <div class="luxury-card bg-white rounded-xl shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                 <div class="h-48 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                    @if($service->image)
+                    <img src="{{ asset($service->image) }}" 
+                         alt="{{ app()->getLocale() == 'ar' ? $service->title_ar : $service->title_en }}" 
+                         class="w-full h-full object-cover">
+                    @else
                     <i class="fas fa-campground text-white text-5xl"></i>
+                    @endif
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'الخيام الأوروبية' : 'European Tents' }}</h3>
-                    <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'خيام أوروبية بمواصفات عالمية وأحجام متنوعة' : 'European tents with world-class specifications and various sizes' }}</p>
-                    <a href="#" class="text-red-600 font-bold hover:text-red-700 transition-colors">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">
+                        {{ app()->getLocale() == 'ar' ? $service->title_ar : $service->title_en }}
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        {{ app()->getLocale() == 'ar' ? $service->description_ar : $service->description_en }}
+                    </p>
+                    <a href="{{ route('services') }}" class="text-red-600 font-bold hover:text-red-700 transition-colors">
                         {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
                     </a>
                 </div>
             </div>
-            
-            <!-- Service 2 -->
-            <div class="luxury-card bg-white rounded-xl shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="200">
-                <div class="h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                    <i class="fas fa-users text-white text-5xl"></i>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'تجهيز المؤتمرات' : 'Conference Setup' }}</h3>
-                    <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'شاشات LED وإضاءة وصوتيات احترافية' : 'Professional LED screens, lighting, and sound systems' }}</p>
-                    <a href="#conferences" class="text-red-600 font-bold hover:text-red-700 transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Service 3 -->
-            <div class="luxury-card bg-white rounded-xl shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="300">
-                <div class="h-48 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
-                    <i class="fas fa-store text-white text-5xl"></i>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'أجنحة المعارض' : 'Exhibition Stands' }}</h3>
-                    <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'تصميم وبناء أجنحة معارض احترافية' : 'Professional exhibition stand design and construction' }}</p>
-                    <a href="#exhibitions" class="text-red-600 font-bold hover:text-red-700 transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Service 4 -->
-            <div class="luxury-card bg-white rounded-xl shadow-lg overflow-hidden group" data-aos="fade-up" data-aos-delay="400">
-                <div class="h-48 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center">
-                    <i class="fas fa-glass-cheers text-white text-5xl"></i>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ app()->getLocale() == 'ar' ? 'تجهيز الحفلات' : 'Event Setup' }}</h3>
-                    <p class="text-gray-600 mb-4">{{ app()->getLocale() == 'ar' ? 'تنظيم وتجهيز الحفلات والمناسبات الرسمية' : 'Organization and setup of parties and official occasions' }}</p>
-                    <a href="#events" class="text-red-600 font-bold hover:text-red-700 transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'تفاصيل أكثر' : 'More Details' }} <i class="fas fa-arrow-left mr-1"></i>
-                    </a>
-                </div>
-            </div>
+            @endforeach
         </div>
+        @else
+        <div class="text-center py-16 bg-white rounded-2xl shadow-xl border-2 border-gray-200">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-6">
+                <i class="fas fa-campground text-gray-400 text-3xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                {{ app()->getLocale() == 'ar' ? 'قريباً' : 'Coming Soon' }}
+            </h3>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                {{ app()->getLocale() == 'ar' ? 'سيتم إضافة الخدمات قريباً' : 'Services will be added soon' }}
+            </p>
+        </div>
+        @endif
     </div>
 </section>
 
@@ -329,10 +323,10 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a href="{{ route('quote') }}" class="bg-white text-red-600 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center">
+                {{-- <a href="{{ route('quote') }}" class="bg-white text-red-600 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center">
                     <i class="fas fa-file-invoice mr-3"></i>
                     {{ app()->getLocale() == 'ar' ? 'اطلب عرض سعر الآن' : 'Request Quote Now' }}
-                </a>
+                </a> --}}
                 <a href="{{ route('products.index') }}" class="bg-transparent text-white px-8 py-4 rounded-xl text-lg font-bold border-2 border-white hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105 flex items-center">
                     <i class="fas fa-shopping-bag mr-3"></i>
                     {{ app()->getLocale() == 'ar' ? 'استكشف منتجاتنا' : 'Explore Our Products' }}

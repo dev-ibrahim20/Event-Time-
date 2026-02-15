@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Dashboard - Edit Portfolio
+تعديل معرض الاعمال
 @stop
 @section('page-header')
     <div class="breadcrumb-header justify-content-between">
@@ -116,22 +116,17 @@ Dashboard - Edit Portfolio
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="images">الصور الحالية</label>
-                                    <input type="hidden" name="current_images" id="current_images" value="{{ implode(',', $portfolio->images ?? []) }}">
-                                    @if($portfolio->images && count($portfolio->images) > 0)
+                                    <input type="hidden" name="current_images" id="current_images" value="{{ is_string($portfolio->images) ? $portfolio->images : '' }}">
+                                    @if($portfolio->images )
                                         <div class="alert alert-info">
                                             <i class="fas fa-info-circle"></i>
-                                            {{ count($portfolio->images) }} صور محملة بالفعل
+                                            صورة محملة بالفعل
                                         </div>
                                         <div class="row">
-                                            @foreach ($portfolio->images as $index => $image)
-                                                <div class="col-md-3 mb-2" id="image-container-{{ $index }}">
-                                                    <img src="{{ asset('storage/' . $image) }}" alt="Portfolio Image {{ $index + 1 }}" 
+                                                <div class="col-md-3 mb-2" >
+                                                    <img src="{{ asset('storage/' . $portfolio->images) }}" alt="Portfolio Image" 
                                                          class="img-fluid rounded" style="max-height: 100px; object-fit: cover;">
-                                                    {{-- <button type="button" class="btn btn-sm btn-danger mt-1" onclick="removeImage({{ $index }})">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button> --}}
                                                 </div>
-                                            @endforeach
                                         </div>
                                     @else
                                         <span class="text-muted">لا توجد صور</span>
@@ -141,8 +136,37 @@ Dashboard - Edit Portfolio
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="new_images">إضافة صور جديدة</label>
-                                    <input type="file" class="form-control" id="new_images" name="images[]" multiple accept="image/*">
+                                    <input type="file" class="form-control" id="new_images" name="images" multiple accept="image/*">
                                     <small class="text-muted">يمكنك رفع عدة صور</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="videos">الفيديوهات الحالية</label>
+                                    <input type="hidden" name="current_videos" id="current_videos" value="{{ is_string($portfolio->videos) ? $portfolio->videos : '' }}">
+                                    @if($portfolio->videos )
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle"></i>
+                                            فيديو محمل بالفعل
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-md-3 mb-2" >
+                                                    <video src="{{ asset('storage/' . $portfolio->videos) }}" alt="Portfolio Video" 
+                                                         class="img-fluid rounded" style="max-height: 100px; object-fit: cover;" controls></video>
+                                                </div>
+                                        </div>
+                                    @else
+                                        <span class="text-muted">لا توجد فيديوهات</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="new_videos">إضافة فيديو جديد</label>
+                                    <input type="file" class="form-control" id="new_videos" name="videos" accept="video/*">
+                                    <small class="text-muted">يمكنك رفع فيديو واحد فقط</small>
                                 </div>
                             </div>
                         </div>

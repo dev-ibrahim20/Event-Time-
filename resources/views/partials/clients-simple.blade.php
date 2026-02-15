@@ -26,43 +26,68 @@
         @if($clients->count() > 0)
         <!-- Moving Clients Row - Horizontal Movement -->
         <div class="relative overflow-hidden bg-white rounded-2xl shadow-xl p-8">
-            <div class="animate-scroll-horizontal flex space-x-6" style="animation: scrollHorizontal 25s linear infinite;">
+            <div class="animate-scroll-horizontal flex space-x-2 md:space-x-4 lg:space-x-6" style="animation: scrollHorizontal 15s linear infinite;">
                 @foreach($clients as $index => $client)
-                <div class="flex-shrink-0 text-center p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl border-2 border-gray-200 hover:border-red-300 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 min-w-[520px] max-w-[520px]">
-                    <!-- Client Logo -->
-                    <div class="w-48 h-48 mx-auto mb-6 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center">
-                        @if($client->image)
-                        <img src="{{ asset('assets/images/clients/' . $client->image) }}" 
-                             alt="{{ app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en }}" 
-                             class="w-full h-full object-contain transition-transform duration-300 hover:scale-110"
-                             onerror="console.log('Image not found: {{ asset('assets/images/clients/' . $client->image) }}'); this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div style="display:none;" class="w-full h-full bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
-                            <span class="text-white font-bold text-4xl">
-                                {{ substr(app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en, 0, 2) }}
-                            </span>
-                        </div>
-                        @else
-                        <div class="w-full h-full bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
-                            <span class="text-white font-bold text-4xl">
-                                {{ substr(app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en, 0, 2) }}
-                            </span>
-                        </div>
-                        @endif
-                    </div>
-                    
-                    <h3 class="font-bold text-gray-900 mb-3 text-xl whitespace-nowrap overflow-hidden text-ellipsis">
-                        {{ app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en }}
-                    </h3>
-                    
+                <div class="flex-shrink-0 text-center p-4 md:p-6 lg:p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 min-w-[200px] md:min-w-[280px] lg:min-w-[520px] max-w-[200px] md:max-w-[280px] lg:max-w-[520px]">
+                    <!-- Client Logo - Circular Clickable -->
                     @if($client->website_url)
-                    <a href="{{ $client->website_url }}" target="_blank" 
-                       class="inline-flex items-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105">
-                        <i class="fas fa-external-link-alt ml-2"></i>
-                        {{ app()->getLocale() == 'ar' ? 'زيارة الموقع' : 'Visit Website' }}
-                    </a>
+                    <a href="{{ $client->website_url }}" target="_blank" class="block w-16 h-16 md:w-20 md:h-20 lg:w-48 lg:h-48 mx-auto mb-4 md:mb-6 group">
+                    @else
+                    <div class="w-16 h-16 md:w-20 md:h-20 lg:w-48 lg:h-48 mx-auto mb-4 md:mb-6">
                     @endif
+                        {{-- <div class="w-full h-full bg-white rounded-full shadow-lg p-6 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105"> --}}
+                            @if($client->image)
+                            <img src="{{ asset('assets/images/clients/' . $client->image) }}" 
+                                 alt="{{ app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en }}" 
+                                 class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                                 onerror="console.log('Image not found: {{ asset('assets/images/clients/' . $client->image) }}'); this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none;" class="w-full h-full bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-4xl">
+                                    {{ substr(app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en, 0, 2) }}
+                                </span>
+                            </div>
+                            @else
+                            <div class="w-full h-full bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-4xl">
+                                    {{ substr(app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en, 0, 2) }}
+                                </span>
+                            </div>
+                            @endif
+                        {{-- </div> --}}
+                    </a>
                 </div>
                 <a href="#"></a>
+                @endforeach
+                <!-- Duplicate clients for seamless loop -->
+                @foreach($clients as $index => $client)
+                <div class="flex-shrink-0 text-center p-4 md:p-6 lg:p-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 min-w-[200px] md:min-w-[280px] lg:min-w-[520px] max-w-[200px] md:max-w-[280px] lg:max-w-[520px]">
+                    <!-- Client Logo - Circular Clickable -->
+                    @if($client->website_url)
+                    <a href="{{ $client->website_url }}" target="_blank" class="block w-16 h-16 md:w-20 md:h-20 lg:w-48 lg:h-48 mx-auto mb-4 md:mb-6 group">
+                    @else
+                    <div class="w-16 h-16 md:w-20 md:h-20 lg:w-48 lg:h-48 mx-auto mb-4 md:mb-6">
+                    @endif
+                        {{-- <div class="w-full h-full bg-white rounded-full shadow-lg p-6 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105"> --}}
+                            @if($client->image)
+                            <img src="{{ asset('assets/images/clients/' . $client->image) }}" 
+                                 alt="{{ app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en }}" 
+                                 class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                                 onerror="console.log('Image not found: {{ asset('assets/images/clients/' . $client->image) }}'); this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display:none;" class="w-full h-full bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-4xl">
+                                    {{ substr(app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en, 0, 2) }}
+                                </span>
+                            </div>
+                            @else
+                            <div class="w-full h-full bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-4xl">
+                                    {{ substr(app()->getLocale() == 'ar' ? $client->name_ar : $client->name_en, 0, 2) }}
+                                </span>
+                            </div>
+                            @endif
+                        {{-- </div> --}}
+                    </a>
+                </div>
                 @endforeach
             </div>
         </div>
@@ -94,7 +119,7 @@
 
 .animate-scroll-horizontal {
     display: flex;
-    animation: scrollHorizontal 25s linear infinite;
+    animation: scrollHorizontal 15s linear infinite;
 }
 
 /* Pause animation on hover */
@@ -110,77 +135,19 @@
 /* Responsive adjustments */
 @media (max-width: 1024px) {
     .animate-scroll-horizontal {
-        animation-duration: 20s;
-    }
-    
-    .min-w-\[520px\] {
-        min-width: 440px !important;
-    }
-    
-    .max-w-\[520px\] {
-        max-width: 440px !important;
-    }
-    
-    .w-48 {
-        width: 10rem !important;
-        height: 10rem !important;
-    }
-    
-    .p-8 {
-        padding: 1.5rem !important;
+        animation-duration: 15s;
     }
 }
 
 @media (max-width: 768px) {
     .animate-scroll-horizontal {
-        animation-duration: 15s;
-    }
-    
-    .min-w-\[520px\] {
-        min-width: 380px !important;
-    }
-    
-    .max-w-\[520px\] {
-        max-width: 380px !important;
-    }
-    
-    .w-48 {
-        width: 8rem !important;
-        height: 8rem !important;
-    }
-    
-    .p-8 {
-        padding: 1.24rem !important;
-    }
-    
-    .text-xl {
-        font-size: 1.125rem !important;
+        animation-duration: 12s;
     }
 }
 
 @media (max-width: 480px) {
     .animate-scroll-horizontal {
-        animation-duration: 10s;
-    }
-    
-    .min-w-\[520px\] {
-        min-width: 320px !important;
-    }
-    
-    .max-w-\[520px\] {
-        max-width: 320px !important;
-    }
-    
-    .w-48 {
-        width: 6rem !important;
-        height: 6rem !important;
-    }
-    
-    .p-8 {
-        padding: 1rem !important;
-    }
-    .text-xl {
-        font-size: 1rem !important;
+        animation-duration: 8s;
     }
 }
 </style>

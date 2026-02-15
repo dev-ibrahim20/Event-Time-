@@ -34,8 +34,8 @@ class PortfolioController extends Controller
             'client_name' => 'nullable|string|max:255',
             'project_date' => 'required|date',
             'location' => 'nullable|string|max:255',
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,jpg,png,gif,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
+            'videos' => 'nullable|file|mimes:mp4,avi,mov,wmv,flv,webm|max:10240',
             'technologies' => 'nullable|array',
             'technologies.*' => 'string|max:100',
             'service_id' => 'nullable|exists:services,id',
@@ -44,12 +44,18 @@ class PortfolioController extends Controller
             'sort_order' => 'integer|min:0',
         ]);
 
-        $images = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
+        $images = null;
+        if ($request->hasFile('image')) {
+                $image = $request->file('image');
                 $path = $image->store('portfolio_images', 'public');
-                $images[] = $path;
-            }
+                $images = $path;
+        }
+
+        $videos = null;
+        if ($request->hasFile('videos')) {
+                $video = $request->file('videos');
+                $path = $video->store('portfolio_videos', 'public');
+                $videos = $path;
         }
 
         Portfolio::create([
@@ -61,6 +67,7 @@ class PortfolioController extends Controller
             'project_date' => $request->project_date,
             'location' => $request->location,
             'images' => $images,
+            'videos' => $videos,
             'service_id' => $request->service_id,
             'is_featured' => $request->boolean('is_featured'),
             'is_active' => $request->boolean('is_active'),
@@ -86,8 +93,8 @@ class PortfolioController extends Controller
             'client_name' => 'nullable|string|max:255',
             'project_date' => 'required|date',
             'location' => 'nullable|string|max:255',
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,jpg,png,gif,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,gif,webp|max:2048',
+            'videos' => 'nullable|file|mimes:mp4,avi,mov,wmv,flv,webm|max:10240',
             'technologies' => 'nullable|array',
             'technologies.*' => 'string|max:100',
             'service_id' => 'nullable|exists:services,id',
@@ -115,11 +122,17 @@ class PortfolioController extends Controller
         //     $images = array_filter($newImages); // Remove empty values
         // }
         
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('portfolio_images', 'public');
-                $images[] = $path;
-            }
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = $image->store('portfolio_images', 'public');
+            $images = $path;
+        }
+
+        $videos = $portfolio->videos ?? '';
+        if ($request->hasFile('videos')) {
+            $video = $request->file('videos');
+            $path = $video->store('portfolio_videos', 'public');
+            $videos = $path;
         }
 
         $portfolio->update([
@@ -131,6 +144,7 @@ class PortfolioController extends Controller
             'project_date' => $request->project_date,
             'location' => $request->location,
             'images' => $images,
+            'videos' => $videos,
             'service_id' => $request->service_id,
             'is_featured' => $request->boolean('is_featured'),
             'is_active' => $request->boolean('is_active'),
@@ -142,6 +156,22 @@ class PortfolioController extends Controller
 
     public function destroy(Portfolio $portfolio)
     {
+        // Delete image from storage if exists
+        if ($portfolio->images) {
+            $imagePath = storage_path('app/public/' . $portfolio->images);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+
+        // Delete video from storage if exists
+        if ($portfolio->videos) {
+            $videoPath = storage_path('app/public/' . $portfolio->videos);
+            if (file_exists($videoPath)) {
+                unlink($videoPath);
+            }
+        }
+
         $portfolio->delete();
         
         if (request()->ajax()) {

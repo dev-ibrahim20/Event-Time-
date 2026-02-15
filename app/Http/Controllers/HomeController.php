@@ -17,6 +17,7 @@ class HomeController extends Controller
         $productsCount = Product::count();
         $careersCount = Career::count();
         $offersCount = Offer::count();
+        $services = Service::where('featured', true)->take(4)->get();
         
         // Get recent activities
         $recentServices = Service::latest()->take(5)->get();
@@ -51,7 +52,8 @@ class HomeController extends Controller
             'phone',
             'email',
             'address',
-            'details'
+            'details',
+            'services'
         ));
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-Dashboard - Add Portfolio
+إضافة معرض جديد
 @stop
 @section('page-header')
     <div class="breadcrumb-header justify-content-between">
@@ -110,9 +110,18 @@ Dashboard - Add Portfolio
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="images">الصور</label>
-                                    <input type="file" class="form-control" id="images" name="images[]" multiple accept="image/*">
-                                    <small class="text-muted">يمكنك رفع عدة صور</small>
+                                    <label for="image">الصورة <span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                                    <small class="text-muted">اختر صورة واحدة للمشروع</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="videos">الفيديو</label>
+                                    <input type="file" class="form-control" id="videos" name="videos" accept="video/*">
+                                    <small class="text-muted">اختر فيديو واحد للمشروع (اختياري)</small>
                                 </div>
                             </div>
                         </div>

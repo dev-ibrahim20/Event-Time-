@@ -19,317 +19,97 @@
     </div>
 </section>
 
-<!-- Services Navigation -->
-<section class="sticky top-20 z-40 bg-white shadow-md border-b">
+<!-- Services Section -->
+<section id="services" class="py-20 bg-white">
     <div class="container mx-auto px-4">
-        <nav class="flex flex-wrap justify-center py-4 space-x-8 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : '' }}">
-            <a href="#tents" class="text-gray-700 hover:text-red-600 font-medium transition-colors py-2">
-                <i class="fas fa-campground ml-2"></i>{{ app()->getLocale() == 'ar' ? 'الخيام الأوروبية' : 'European Tents' }}
-            </a>
-            @if (app()->getLocale() == 'en')
-                <a href=""></a>
-            @endif
-            <a href="#conferences" class="text-gray-700 hover:text-red-600 font-medium transition-colors py-2">
-                <i class="fas fa-users ml-2"></i>{{ app()->getLocale() == 'ar' ? 'تجهيز المؤتمرات' : 'Conference Setup' }}
-            </a>
-            <a href="#exhibitions" class="text-gray-700 hover:text-red-600 font-medium transition-colors py-2">
-                <i class="fas fa-store ml-2"></i>{{ app()->getLocale() == 'ar' ? 'أجنحة المعارض' : 'Exhibition Stands' }}
-            </a>
-            <a href="#events" class="text-gray-700 hover:text-red-600 font-medium transition-colors py-2">
-                <i class="fas fa-glass-cheers ml-2"></i>{{ app()->getLocale() == 'ar' ? 'تجهيز الحفلات' : 'Event Setup' }}
-            </a>
-        </nav>
-    </div>
-</section>
-
-<!-- European Tents Section -->
-<section id="tents" class="py-20 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div data-aos="fade-right">
-                <div class="mb-6">
-                    <span class="bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm font-bold">
-                        {{ app()->getLocale() == 'ar' ? 'خدمة مميزة' : 'Featured Service' }}
-                    </span>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    {{ app()->getLocale() == 'ar' ? 'الخيام الأوروبية' : 'European Tents' }}
-                </h2>
-                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                    {{ app()->getLocale() == 'ar' ? 'نقدم أحدث الخيام الأوروبية بمواصفات عالمية، مصممة لتلبية جميع احتياجات الفعاليات الكبرى. خيامنا تتميز بالمتانة والجودة العالية والتصميم الأنيق الذي يضيف لمسة من الفخامة لفعاليتكم.' : 'We offer the latest European tents with world-class specifications, designed to meet all your major event needs. Our tents are distinguished by luxury, high quality, and elegant design that adds a touch of sophistication to your events.' }}
-                </p>
-                
-                <!-- Features -->
-                <div class="space-y-4 mb-8">
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-red-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'مقاسات متنوعة' : 'Various Sizes' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'من 10x10م حتى 50x100م وأكثر' : 'From 10x10m to 50x100m and more' }}</p>
+        @php
+            $services = \App\Models\Service::all();
+        @endphp
+        
+        @if($services->count() > 0)
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @foreach($services as $service)
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                <!-- Service Image -->
+                <div class="relative h-64 bg-gradient-to-br from-red-50 to-red-100 overflow-hidden">
+                    @if($service->image)
+                    <img src="{{ asset('assets/imag/'.$service->image) }}" 
+                         alt="{{ app()->getLocale() == 'ar' ? $service->title_ar : $service->title_en }}" 
+                         class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-50 to-red-100\'><i class=\'fas fa-campground text-red-300 text-4xl\'></i></div>'">
+                    @else
+                    <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-50 to-red-100">
+                        <i class="fas fa-campground text-red-300 text-4xl"></i>
+                    </div>
+                    @endif
+                    
+                    <!-- Featured Badge -->
+                    @if($service->featured)
+                    <div class="absolute top-4 right-4">
+                        <div class="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 rounded-full shadow-lg flex items-center">
+                            <i class="fas fa-star mr-1"></i>
+                            <span class="font-bold text-xs">{{ app()->getLocale() == 'ar' ? 'مميز' : 'Featured' }}</span>
                         </div>
                     </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-red-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'مواد عالية الجودة' : 'High Quality Materials' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'قماش مقاوم للحريق والطقس' : 'Fire and weather resistant' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-red-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'تصميم عصري' : 'Elegant Design' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'أشكال وألوان متنوعة تناسب جميع المناسبات' : 'Various shapes and colors suitable for all occasions' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-red-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'تركيب احترافي' : 'Professional Installation' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'فريق متخصص للتركيب والفك السريع' : 'Specialized team for quick installation and dismantling' }}</p>
-                        </div>
-                    </div>
+                    @endif
                 </div>
                 
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="{{ route('quote') }}?service=tents" class="bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
-                    </a>
-                    <a href="{{ route('gallery') }}#tents" class="border-2 border-red-600 text-red-600 px-6 py-3 rounded-lg font-bold hover:bg-red-600 hover:text-white transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'معرض الصور' : 'View Gallery' }}
-                    </a>
+                <!-- Service Content -->
+                <div class="p-6">
+                    <!-- Title -->
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-red-600 transition-colors">
+                        {{ app()->getLocale() == 'ar' ? $service->title_ar : $service->title_en }}
+                    </h3>
+                    
+                    <!-- Description -->
+                    <p class="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                        {{ app()->getLocale() == 'ar' ? $service->description_ar : $service->description_en }}
+                    </p>
+                    
+                    <!-- Features -->
+                    @if($service->features && is_array($service->features))
+                    <div class="space-y-2 mb-4">
+                        @foreach ($service->features as $index => $feature)
+                            @if($index < 3) <!-- Show only first 3 features -->
+                            <div class="flex items-start space-x-2 space-x-reverse">
+                                <i class="fas fa-check-circle text-red-600 text-sm mt-0.5 flex-shrink-0"></i>
+                                <p class="text-sm text-gray-600 line-clamp-1">{{ app()->getLocale() == 'ar' ? $feature->title_ar : $feature->title_en }}</p>
+                            </div>
+                            @endif
+                        @endforeach
+                    </div>
+                    @endif
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="{{ route('quote') }}?service={{ $service->id }}" 
+                           class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-sm text-center">
+                            <i class="fas fa-file-invoice mr-1"></i>
+                            {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
+                        </a>
+                        <a href="{{ route('gallery') }}?service={{ $service->id }}" 
+                           class="flex-1 border-2 border-red-600 text-red-600 px-4 py-2 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-300 font-medium text-sm text-center">
+                            <i class="fas fa-images mr-1"></i>
+                            {{ app()->getLocale() == 'ar' ? 'معرض الصور' : 'Gallery' }}
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-            <div data-aos="fade-left">
-                <div class="grid grid-cols-2 gap-4">
-                    <img src="{{ asset('assets/images/tents/tent1.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'خيمة أوروبية 1' : 'European Tent 1' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/tents/tent2.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'خيمة أوروبية 2' : 'European Tent 2' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/tents/tent3.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'خيمة أوروبية 3' : 'European Tent 3' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/tents/tent4.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'خيمة أوروبية 4' : 'European Tent 4' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                </div>
-            </div>
+            @endforeach
         </div>
-    </div>
-</section>
-
-<!-- Conferences Section -->
-<section id="conferences" class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div class="order-2 lg:order-1" data-aos="fade-right">
-                <div class="grid grid-cols-2 gap-4">
-                    <img src="{{ asset('assets/images/conferences/conf1.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'مؤتمر 1' : 'Conference 1' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/conferences/conf2.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'مؤتمر 2' : 'Conference 2' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/conferences/conf3.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'مؤتمر 3' : 'Conference 3' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/conferences/conf4.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'مؤتمر 4' : 'Conference 4' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                </div>
+        @else
+        <div class="text-center py-16 bg-white rounded-2xl shadow-xl border-2 border-gray-200">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-6">
+                <i class="fas fa-campground text-gray-400 text-3xl"></i>
             </div>
-            
-            <div class="order-1 lg:order-2" data-aos="fade-left">
-                <div class="mb-6">
-                    <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-bold">
-                        {{ app()->getLocale() == 'ar' ? 'خدمة متكاملة' : 'Complete Service' }}
-                    </span>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    {{ app()->getLocale() == 'ar' ? 'تجهيز المؤتمرات والندوات' : 'Conference & Seminar Setup' }}
-                </h2>
-                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                    {{ app()->getLocale() == 'ar' ? 'نوفر تجهيزات متكاملة للمؤتمرات والندوات بأحدث التقنيات. من شاشات LED ضخمة إلى أنظمة الصوت الاحترافية والإضاءة المتطورة، نضمن لكم مؤتمراً ناجحاً يترك انطباعاً قوياً لدى الحضور.' : 'We provide complete equipment for conferences and seminars with the latest technologies. From large LED screens to professional sound systems and advanced lighting, we ensure your conference is successful and leaves a lasting impression on your attendees.' }}
-                </p>
-                
-                <!-- Features -->
-                <div class="space-y-4 mb-8">
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-blue-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'شاشات LED' : 'LED Screens' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'جميع المقاسات بدقة 4K و8K' : 'All sizes with 4K and 8K resolution' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-blue-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'أنظمة صوتية' : 'Sound Systems' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'معدات احترافية من أفضل العلامات التجارية' : 'Professional equipment from top commercial brands' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-blue-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'إضاءة احترافية' : 'Professional Lighting' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'أنظمة إضاءة متطورة مع تأثيرات بصرية' : 'Advanced lighting systems with visual effects' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-blue-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'الترجمة الفورية' : 'Simultaneous Translation' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'نظام ترجمة فورية لعدة لغات' : 'Real-time translation system for multiple languages' }}</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="{{ route('quote') }}?service=conferences" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
-                    </a>
-                    <a href="{{ route('gallery') }}#conferences" class="border-2 border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-blue-600 hover:text-white transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'معرض الصور' : 'View Gallery' }}
-                    </a>
-                </div>
-            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                {{ app()->getLocale() == 'ar' ? 'قريباً' : 'Coming Soon' }}
+            </h3>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                {{ app()->getLocale() == 'ar' ? 'سيتم إضافة الخدمات قريباً' : 'Services will be added soon' }}
+            </p>
         </div>
-    </div>
-</section>
-
-<!-- Exhibition Stands Section -->
-<section id="exhibitions" class="py-20 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div data-aos="fade-right">
-                <div class="mb-6">
-                    <span class="bg-green-100 text-green-600 px-4 py-2 rounded-full text-sm font-bold">
-                        {{ app()->getLocale() == 'ar' ? 'تصميم مبتكر' : 'Innovative Design' }}
-                    </span>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    {{ app()->getLocale() == 'ar' ? 'تصميم وبناء أجنحة معارض' : 'Exhibition Stand Design & Construction' }}
-                </h2>
-                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                    {{ app()->getLocale() == 'ar' ? 'نصمم وننفذ أجنحة معارض مبتكرة تجذب الانتباه وتبرز هوية علامتكم التجارية. من التصميم ثلاثي الأبعاد إلى التنفيذ النهائي، نضمن لكم جناحاً استثنائياً يترك انطباعاً دائماً لدى الزوار.' : 'We design and build innovative exhibition stands that attract attention and enhance your commercial brand. From 3D design to final implementation, we ensure your stand stands out and leaves a lasting impression on your visitors.' }}
-                </p>
-                
-                <!-- Features -->
-                <div class="space-y-4 mb-8">
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-green-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'تصميم ثلاثي الأبعاد' : '3D Design' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'تصاميم واقعية قبل التنفيذ' : 'Realistic designs before implementation' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-green-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'مواد عالية الجودة' : 'High Quality Materials' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'أفضل المواد والتقنيات الحديثة' : 'Best materials and latest technologies' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-green-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'تركيب سريع' : 'Quick Installation' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'تركيب سريع في الوقت المحدد' : 'Quick installation within deadline' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-green-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'صيانة ودعم' : 'Maintenance & Support' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'خدمة صيانة مستمرة طوال فترة المعرض' : 'Continuous maintenance service throughout the exhibition' }}</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="{{ route('quote') }}?service=exhibitions" class="bg-green-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-green-700 transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
-                    </a>
-                    <a href="{{ route('gallery') }}#exhibitions" class="border-2 border-green-600 text-green-600 px-6 py-3 rounded-lg font-bold hover:bg-green-600 hover:text-white transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'معرض الصور' : 'View Gallery' }}
-                    </a>
-                </div>
-            </div>
-            
-            <div data-aos="fade-left">
-                <div class="grid grid-cols-2 gap-4">
-                    <img src="{{ asset('assets/images/exhibitions/stand1.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'جناح معرض 1' : 'Exhibition Stand 1' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/exhibitions/stand2.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'جناح معرض 2' : 'Exhibition Stand 2' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/exhibitions/stand3.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'جناح معرض 3' : 'Exhibition Stand 3' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/exhibitions/stand4.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'جناح معرض 4' : 'Exhibition Stand 4' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Events Section -->
-<section id="events" class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <div class="order-2 lg:order-1" data-aos="fade-right">
-                <div class="grid grid-cols-2 gap-4">
-                    <img src="{{ asset('assets/images/events/event1.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'حفلة 1' : 'Event 1' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/events/event2.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'حفلة 2' : 'Event 2' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/events/event3.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'حفلة 3' : 'Event 3' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                    <img src="{{ asset('assets/images/events/event4.jpg') }}" alt="{{ app()->getLocale() == 'ar' ? 'حفلة 4' : 'Event 4' }}" class="rounded-lg shadow-lg w-full h-48 object-cover">
-                </div>
-            </div>
-            
-            <div class="order-1 lg:order-2" data-aos="fade-left">
-                <div class="mb-6">
-                    <span class="bg-purple-100 text-purple-600 px-4 py-2 rounded-full text-sm font-bold">
-                        {{ app()->getLocale() == 'ar' ? 'تنظيم متكامل' : 'Complete Organization' }}
-                    </span>
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                    {{ app()->getLocale() == 'ar' ? 'تجهيز الحفلات والمناسبات' : 'Event Setup & Management' }}
-                </h2>
-                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                    {{ app()->getLocale() == 'ar' ? 'ننظم ونجهز جميع أنواع الحفلات والمناسبات الرسمية والخاصة. من الأفراح إلى حفلات الشركات والمناسبات الخاصة، نقدم لكم تجربة لا تُنسى باهتمام بكل التفاصيل الصغيرة.' : 'We organize and setup all types of parties and official and private occasions. From corporate events to private parties, we provide you with an unforgettable experience, taking care of every small detail.' }}
-                </p>
-                
-                <!-- Features -->
-                <div class="space-y-4 mb-8">
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-purple-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'تنسيق الزهور' : 'Flower Decoration' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'تصاميم زهور فاخرة وأنيقة' : 'Elegant and beautiful flower arrangements' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-purple-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'الديكور والإضاءة' : 'Decor & Lighting' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'ديكورات احترافية مع إضاءة سحرية' : 'Professional decorations with magical lighting' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-purple-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'تجهيزات الطعام' : 'Catering Services' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'تجهيزات كاملة للطعام والشراب' : 'Complete food and beverage services' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-purple-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'الموسيقى والترفيه' : 'Entertainment & Music' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'فرق موسيقية وبرامج ترفيهية' : 'Live bands and entertainment programs' }}</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-3 space-x-reverse">
-                        <i class="fas fa-check-circle text-purple-600 text-xl mt-1"></i>
-                        <div>
-                            <h4 class="font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'تجهيزات الطعام' : 'Event Equipment' }}</h4>
-                            <p class="text-gray-600">{{ app()->getLocale() == 'ar' ? 'تجهيزات كاملة للطعام والشراب' : 'Complete food and beverage equipment' }}</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="{{ route('quote') }}?service=events" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-purple-700 transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
-                    </a>
-                    <a href="{{ route('gallery') }}#events" class="border-2 border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-bold hover:bg-purple-600 hover:text-white transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'معرض الصور' : 'View Gallery' }}
-                    </a>
-                </div>
-            </div>
-        </div>
+        @endif
     </div>
 </section>
 
