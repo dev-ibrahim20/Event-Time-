@@ -48,11 +48,12 @@
             <div class="space-y-4">
                 <h4 class="text-lg font-bold text-red-500">{{ app()->getLocale() == 'ar' ? 'خدماتنا' : 'Our Services' }}</h4>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('services') }}#tents" class="text-gray-300 hover:text-red-500 transition-colors">{{ app()->getLocale() == 'ar' ? 'الخيام الأوروبية' : 'European Tents' }}</a></li>
-                    <li><a href="{{ route('services') }}#conferences" class="text-gray-300 hover:text-red-500 transition-colors">{{ app()->getLocale() == 'ar' ? 'تجهيز المؤتمرات' : 'Conference Setup' }}</a></li>
-                    <li><a href="{{ route('services') }}#exhibitions" class="text-gray-300 hover:text-red-500 transition-colors">{{ app()->getLocale() == 'ar' ? 'أجنحة المعارض' : 'Exhibition Stands' }}</a></li>
-                    <li><a href="{{ route('services') }}#events" class="text-gray-300 hover:text-red-500 transition-colors">{{ app()->getLocale() == 'ar' ? 'تجهيز الحفلات' : 'Event Setup' }}</a></li>
-                    <li><a href="{{ route('quote') }}" class="text-gray-300 hover:text-red-500 transition-colors">{{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}</a></li>
+                    @php
+                        $services = \App\Models\Service::where('status', true)->take(5)->get();
+                    @endphp
+                    @foreach($services as $service)
+                        <li><a href="{{ route('services') }}#service-{{ $service->id }}" class="text-gray-300 hover:text-red-500 transition-colors">{{ app()->getLocale() == 'ar' ? $service->title_ar : $service->title_en }}</a></li>
+                    @endforeach
                 </ul>
             </div>
 

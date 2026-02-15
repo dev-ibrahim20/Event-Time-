@@ -82,12 +82,12 @@
                     
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="{{ route('quote') }}?service={{ $service->id }}" 
-                           class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-sm text-center">
-                            <i class="fas fa-file-invoice mr-1"></i>
-                            {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
+                        <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" 
+                           class="flex-1 bg-gradient-to-r border-x-green-600 from-red-800 to-red-800 text-red px-4 py-2 rounded-lg hover:bg-green-600 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-sm text-center">
+                            <i class="fab fa-whatsapp mr-1"></i>
+                            {{ app()->getLocale() == 'ar' ? 'تواصل واتساب' : 'Contact WhatsApp' }}
                         </a>
-                        <a href="{{ route('gallery') }}?service={{ $service->id }}" 
+                        <a href="{{ route('gallery') }}" 
                            class="flex-1 border-2 border-red-600 text-red-600 px-4 py-2 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-300 font-medium text-sm text-center">
                             <i class="fas fa-images mr-1"></i>
                             {{ app()->getLocale() == 'ar' ? 'معرض الصور' : 'Gallery' }}

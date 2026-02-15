@@ -21,7 +21,7 @@
                 @endif
                 <a href="{{ route('services') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'خدماتنا' : 'Our Services' }}</a>
                 <a href="{{ route('products.index') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'منتجتنا' : 'Our Products' }}</a>
-                <a href="{{ route('gallery') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'معرض الأعمال' : 'Gallery' }}</a>
+                <a href="{{ route('gallery') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'اعمالنا' : 'Our Work' }}</a>
                 <a href="{{ route('about') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'من نحن' : 'About Us' }}</a>
                 <a href="{{ route('contact') }}" class="text-gray-700 hover:text-red-600 transition-colors font-medium">{{ app()->getLocale() == 'ar' ? 'اتصل بنا' : 'Contact Us' }}</a>
             </div>
@@ -48,8 +48,8 @@
                 </a>
                 
                 <!-- Quote Request Button -->
-                <a href="{{ route('quote') }}" class="bg-gradient-to-r from-red-600 to-red-800 text-white px-6 py-2 rounded-lg hover:from-red-700 hover:to-red-900 transition-all duration-300 transform hover:scale-105">
-                    <span class="font-medium">{{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}</span>
+                <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" class="bg-gradient-to-r from-red-600 to-red-800 text-white px-6 py-2 rounded-lg hover:from-red-700 hover:to-red-900 transition-all duration-300 transform hover:scale-105">
+                    <span class="font-medium">{{ app()->getLocale() == 'ar' ? 'تواصل واتساب' : 'Contact WhatsApp' }}</span>
                 </a>
             </div>
 

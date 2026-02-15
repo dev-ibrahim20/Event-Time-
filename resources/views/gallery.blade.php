@@ -72,7 +72,7 @@
                         @foreach($projects as $project)
                             @if($project->images)
                             <div class="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" 
-                                 onclick="openLightbox('{{ asset('storage/' . $project->images) }}', '{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}', '{{ app()->getLocale() == 'ar' ? $project->description_ar : $project->description_en }}')">
+                                 onclick="event.preventDefault(); openVideoLightbox('{{ asset('storage/' . $project->images) }}', '{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}', '{{ app()->getLocale() == 'ar' ? $project->description_ar : $project->description_en }}')">
                                 <!-- Image Container -->
                                 <div class="relative w-full h-40 overflow-hidden rounded-lg shadow-md border border-gray-200">
                                     <img src="{{ asset('storage/' . $project->images) }}" 
@@ -241,9 +241,9 @@
                 {{ app()->getLocale() == 'ar' ? 'تواصل معنا الآن وابدأ مشروعك القادم مع فريق من الخبراء' : 'Contact us now and start your next project with a team of experts' }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('quote') }}" class="bg-white text-red-600 px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                    <i class="fas fa-file-invoice ml-2"></i>
-                    {{ app()->getLocale() == 'ar' ? 'ابدأ مشروعك' : 'Start Your Project' }}
+                <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" class="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-green-600 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    <i class="fab fa-whatsapp ml-2"></i>
+                    {{ app()->getLocale() == 'ar' ? 'تواصل عبر واتس앱' : 'Contact via WhatsApp' }}
                 </a>
                 <a href="{{ route('contact') }}" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
                     <i class="fas fa-phone ml-2"></i>
@@ -255,4 +255,115 @@
 </section>
 
 @include('partials.clients-simple')
+
+<!-- Lightbox Modals -->
+<div id="imageLightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4">
+    <div class="relative max-w-6xl w-full">
+        <button onclick="closeLightbox()" class="absolute -top-16 right-0 text-white hover:text-red-500 transition-colors">
+            <i class="fas fa-times text-4xl"></i>
+        </button>
+        <div class="bg-black rounded-2xl overflow-hidden shadow-2xl">
+            <img id="lightboxImage" src="" alt="" class="w-full max-h-[80vh] object-contain">
+        </div>
+        <div class="text-center mt-6">
+            <h3 id="imageTitle" class="text-white text-2xl font-bold mb-2"></h3>
+            <p id="imageDescription" class="text-gray-300 text-lg"></p>
+        </div>
+    </div>
+</div>
+
+<div id="videoLightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4">
+    <div class="relative max-w-6xl w-full">
+        <button onclick="closeVideoLightbox()" class="absolute -top-16 right-0 text-white hover:text-red-500 transition-colors">
+            <i class="fas fa-times text-4xl"></i>
+        </button>
+        <div class="bg-black rounded-2xl overflow-hidden shadow-2xl">
+            <video id="lightboxVideo" class="w-full max-h-[80vh]" controls autoplay>
+                <source src="" type="video/mp4">
+                {{ app()->getLocale() == 'ar' ? 'متصفحك لا يدعم تشغيل الفيديو' : 'Your browser does not support video playback' }}
+            </video>
+        </div>
+        <div class="text-center mt-6">
+            <h3 id="videoTitle" class="text-white text-2xl font-bold"></h3>
+        </div>
+    </div>
+</div>
+
+<script>
+function openLightbox(imageSrc, title, description) {
+    console.log('Opening image lightbox:', imageSrc);
+    document.getElementById('lightboxImage').src = imageSrc;
+    document.getElementById('imageTitle').textContent = title;
+    document.getElementById('imageDescription').textContent = description;
+    document.getElementById('imageLightbox').classList.remove('hidden');
+    document.getElementById('imageLightbox').classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    console.log('Closing image lightbox');
+    document.getElementById('imageLightbox').classList.add('hidden');
+    document.getElementById('imageLightbox').classList.remove('flex');
+    document.body.style.overflow = 'auto';
+}
+
+function openVideoLightbox(videoSrc, title) {
+    console.log('Opening video lightbox:', videoSrc);
+    document.getElementById('lightboxVideo').src = videoSrc;
+    document.getElementById('videoTitle').textContent = title;
+    document.getElementById('videoLightbox').classList.remove('hidden');
+    document.getElementById('videoLightbox').classList.add('flex');
+    document.getElementById('lightboxVideo').play();
+    document.body.style.overflow = 'hidden';
+}
+
+function closeVideoLightbox() {
+    console.log('Closing video lightbox');
+    document.getElementById('lightboxVideo').pause();
+    document.getElementById('lightboxVideo').src = '';
+    document.getElementById('videoLightbox').classList.add('hidden');
+    document.getElementById('videoLightbox').classList.remove('flex');
+    document.body.style.overflow = 'auto';
+}
+
+// Filter functionality
+document.getElementById('btn-all').addEventListener('click', function() {
+    document.getElementById('images-gallery').style.display = 'block';
+    document.getElementById('videos-gallery').style.display = 'block';
+    updateFilterButtons('all');
+});
+
+document.getElementById('btn-images').addEventListener('click', function() {
+    document.getElementById('images-gallery').style.display = 'block';
+    document.getElementById('videos-gallery').style.display = 'none';
+    updateFilterButtons('images');
+});
+
+document.getElementById('btn-videos').addEventListener('click', function() {
+    document.getElementById('images-gallery').style.display = 'none';
+    document.getElementById('videos-gallery').style.display = 'block';
+    updateFilterButtons('videos');
+});
+
+function updateFilterButtons(active) {
+    const buttons = ['btn-all', 'btn-images', 'btn-videos'];
+    buttons.forEach(btn => {
+        const button = document.getElementById(btn);
+        if (btn === 'btn-' + active || (active === 'all' && btn === 'btn-all')) {
+            button.className = 'px-6 py-2 rounded-full font-medium transition-all duration-300 bg-red-600 text-white';
+        } else {
+            button.className = 'px-6 py-2 rounded-full font-medium transition-all duration-300 bg-gray-200 text-gray-700 hover:bg-gray-300';
+        }
+    });
+}
+
+// Close on ESC
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeLightbox();
+        closeVideoLightbox();
+    }
+});
+</script>
+
 @endsection

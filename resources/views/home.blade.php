@@ -58,9 +58,9 @@
         
         <!-- CTA Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center" data-aos="fade-up" data-aos-delay="200">
-            <a href="{{ route('quote') }}" class="bg-gradient-to-r from-red-600 to-red-800 text-white px-8 py-4 rounded-lg text-lg font-bold hover:from-red-700 hover:to-red-900 transition-all duration-300 transform hover:scale-105 shadow-2xl">
-                <i class="fas fa-file-invoice ml-2"></i>
-                {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
+            <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" class="bg-gradient-to-r from-red-600 to-red-800 text-white px-8 py-4 rounded-lg text-lg font-bold hover:from-red-700 hover:to-red-900 transition-all duration-300 transform hover:scale-105 shadow-2xl">
+                <i class="fab fa-whatsapp ml-2"></i>
+                {{ app()->getLocale() == 'ar' ? 'تواصل واتساب' : 'Contact WhatsApp' }}
             </a>
             <a href="tel:+966500000000" class="bg-white/20 backdrop-blur-md text-white border-2 border-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
                 <i class="fas fa-phone ml-2"></i>
@@ -323,9 +323,9 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                {{-- <a href="{{ route('quote') }}" class="bg-white text-red-600 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center">
-                    <i class="fas fa-file-invoice mr-3"></i>
-                    {{ app()->getLocale() == 'ar' ? 'اطلب عرض سعر الآن' : 'Request Quote Now' }}
+                {{-- <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" class="bg-white text-red-600 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center">
+                    <i class="fab fa-whatsapp mr-3"></i>
+                    {{ app()->getLocale() == 'ar' ? 'تواصل واتساب' : 'Contact WhatsApp' }}
                 </a> --}}
                 <a href="{{ route('products.index') }}" class="bg-transparent text-white px-8 py-4 rounded-xl text-lg font-bold border-2 border-white hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105 flex items-center">
                     <i class="fas fa-shopping-bag mr-3"></i>
@@ -367,9 +367,9 @@
                 {{ app()->getLocale() == 'ar' ? 'تواصل معنا الآن واحصل على استشارة مجانية وعرض سعر خاص' : 'Contact us now and get a free consultation and special quote' }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('quote') }}" class="bg-white text-red-600 px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                    <i class="fas fa-file-invoice ml-2"></i>
-                    {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
+                <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" class="bg-white text-red-600 px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    <i class="fab fa-whatsapp ml-2"></i>
+                    {{ app()->getLocale() == 'ar' ? 'تواصل واتساب' : 'Contact WhatsApp' }}
                 </a>
                 <a href="tel:+966500000000" class="bg-white/20 backdrop-blur-md text-white border-2 border-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
                     <i class="fas fa-phone ml-2"></i>

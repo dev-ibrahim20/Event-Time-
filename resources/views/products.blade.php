@@ -363,9 +363,9 @@
                 {{ app()->getLocale() == 'ar' ? 'تواصل معنا الآن واحصل على استشارة مجانية لاختيار المنتجات المناسبة لفعاليتك' : 'Contact us now and get a free consultation to choose the right products for your event' }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('quote') }}" class="bg-white text-red-600 px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                    <i class="fas fa-file-invoice ml-2"></i>
-                    {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
+                <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" class="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-green-600 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    <i class="fab fa-whatsapp ml-2"></i>
+                    {{ app()->getLocale() == 'ar' ? 'تواصل عبر واتس앱' : 'Contact via WhatsApp' }}
                 </a>
             </div>
         </div>

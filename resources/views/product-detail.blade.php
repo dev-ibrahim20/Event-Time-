@@ -130,9 +130,9 @@
                 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="{{ route('quote') }}?product={{ $product->id }}" class="flex-1 bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors text-center font-semibold">
-                        <i class="fas fa-file-invoice {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
-                        {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
+                    <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" class="flex-1 bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors text-center font-semibold">
+                        <i class="fab fa-whatsapp {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
+                        {{ app()->getLocale() == 'ar' ? 'تواصل عبر واتس앱' : 'Contact via WhatsApp' }}
                     </a>
                     <a href="tel:+966500000000" class="flex-1 bg-gray-100 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors text-center font-semibold">
                         <i class="fas fa-phone {{ app()->getLocale() == 'ar' ? 'ml-2' : 'mr-2' }}"></i>
@@ -152,7 +152,7 @@
                     <a href="#" class="text-gray-400 hover:text-red-600 transition-colors">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-red-600 transition-colors">
+                    <a href="https://wa.me/201234567890" target="_blank" class="text-gray-400 hover:text-red-600 transition-colors">
                         <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
@@ -266,9 +266,9 @@
                 {{ app()->getLocale() == 'ar' ? 'تواصل معنا الآن واحصل على استشارة مجانية وعرض سعر خاص' : 'Contact us now and get a free consultation and special quote' }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('quote') }}?product={{ $product->id }}" class="bg-white text-red-600 px-8 py-4 rounded-lg text-lg font-bold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
-                    <i class="fas fa-file-invoice ml-2"></i>
-                    {{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}
+                <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" class="bg-green-500 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-green-600 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    <i class="fab fa-whatsapp ml-2"></i>
+                    {{ app()->getLocale() == 'ar' ? 'تواصل عبر واتس앱' : 'Contact via WhatsApp' }}
                 </a>
                 <a href="tel:+966500000000" class="bg-white/20 backdrop-blur-md text-white border-2 border-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
                     <i class="fas fa-phone ml-2"></i>
