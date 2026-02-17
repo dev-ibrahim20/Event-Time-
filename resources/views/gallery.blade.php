@@ -44,20 +44,28 @@
         </div>
     </section>
 
-<!-- Media Gallery Section -->
-<section class="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
-    <div class="container mx-auto px-4">
+<!-- Modern Gallery Section -->
+<section class="py-20 bg-white relative overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-blue-100/30 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-100/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-100/30 rounded-full blur-2xl animate-bounce"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
         
         <!-- Images Section -->
-        <div class="relative">
+        <div class="mb-20">
             <!-- Section Header -->
-            <div class="w-auto text-right mb-12" data-aos="fade-up" data-aos-delay="100">
-                <h2 class="text-xl font-bold text-gray-900">
-                    <span class="text-blue-600">
-                        <i class="fas fa-image ml-2"></i>
-                        {{ app()->getLocale() == 'ar' ? 'صور' : 'Images' }}
+            <div class="text-right mb-12" data-aos="fade-up">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                    <span class="bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 bg-clip-text text-transparent animate-gradient">
+                        <i class="fas fa-image ml-4"></i>
+                        {{ app()->getLocale() == 'ar' ? 'معرض الصور' : 'Image Gallery' }}
                     </span>
                 </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 ml-auto rounded-full animate-pulse"></div>
             </div>
             
             <!-- Images Gallery -->
@@ -68,76 +76,88 @@
                     $projects = \App\Models\Portfolio::where('is_active', true)->get();
                 @endphp
                 @if($projects->count() > 0)
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                         @foreach($projects as $project)
                             @if($project->images)
-                            <div class="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" 
-                                 onclick="event.preventDefault(); openVideoLightbox('{{ asset('storage/' . $project->images) }}', '{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}', '{{ app()->getLocale() == 'ar' ? $project->description_ar : $project->description_en }}')">
+                            <div class="group relative transform transition-all duration-500 hover:scale-105" 
+                                 data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}"
+                                 onclick="openLightbox('{{ asset('storage/' . $project->images) }}', '{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}', '{{ app()->getLocale() == 'ar' ? $project->description_ar : $project->description_en }}')">
                                 <!-- Image Container -->
-                                <div class="relative w-full h-40 overflow-hidden rounded-lg shadow-md border border-gray-200">
-                                    <img src="{{ asset('storage/' . $project->images) }}" 
-                                         alt="{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}" 
-                                         class="w-full h-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:brightness-90">
+                                <div class="relative overflow-hidden rounded-2xl shadow-2xl bg-white border border-gray-200">
+                                    <div class="aspect-w-16 aspect-h-12">
+                                        <img src="{{ asset('storage/' . $project->images) }}" 
+                                             alt="{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}" 
+                                             class="w-full h-64 object-cover transition-all duration-700 group-hover:scale-110">
+                                    </div>
                                     
-                                    <!-- Overlay -->
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <!-- Gradient Overlay -->
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                     
-                                    <!-- Search Icon -->
-                                    <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                        <div class="bg-white/90 backdrop-blur-sm text-gray-800 p-2 rounded-full shadow-md">
-                                            <i class="fas fa-search-plus text-sm"></i>
+                                    <!-- Floating Action Buttons -->
+                                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
+                                        <div class="bg-white/90 backdrop-blur-sm text-gray-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300">
+                                            <i class="fas fa-search-plus"></i>
                                         </div>
                                     </div>
                                     
-                                    <!-- Title -->
-                                    <div class="absolute bottom-0 left-0 right-0 p-2 text-white transform transition-all duration-300 group-hover:translate-y-0">
-                                        <h4 class="text-xs font-bold truncate">
+                                    <!-- Project Info -->
+                                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                        <h3 class="text-white font-bold text-lg mb-2">
                                             {{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}
-                                        </h4>
+                                        </h3>
+                                        <p class="text-gray-300 text-sm line-clamp-2">
+                                            {{ app()->getLocale() == 'ar' ? $project->description_ar : $project->description_en }}
+                                        </p>
                                     </div>
+                                    
+                                    <!-- Shimmer Effect -->
+                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                                 </div>
                             </div>
                             @endif
                         @endforeach
                     </div>
                 @else
-                    <div class="text-center py-16 bg-white rounded-2xl shadow-lg border border-gray-200">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full mb-6 shadow-lg">
-                            <i class="fas fa-image text-blue-400 text-3xl"></i>
+                    <div class="text-center py-20 bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl border border-gray-200">
+                        <div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full mb-6 shadow-2xl shadow-blue-200/50">
+                            <i class="fas fa-image text-blue-600 text-4xl animate-pulse"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-3">
-                            {{ app()->getLocale() == 'ar' ? 'لا توجد صور حالياً' : 'No images available' }}
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                            {{ app()->getLocale() == 'ar' ? 'سيتم إضافة الصور قريباً' : 'Images Coming Soon' }}
                         </h3>
-                        <p class="text-gray-600">
-                            {{ app()->getLocale() == 'ar' ? 'سيتم إضافة الصور قريباً' : 'Images will be added soon' }}
+                        <p class="text-gray-600 text-lg">
+                            {{ app()->getLocale() == 'ar' ? 'نحن نجهز أفضل أعمالنا لعرضها عليك' : 'We are preparing our best work to show you' }}
                         </p>
                     </div>
                 @endif
             </div>
         </div>
         
-        <!-- Divider -->
-        <div class="relative mb-16">
+        <!-- Animated Divider -->
+        <div class="relative mb-20">
             <div class="absolute inset-0 flex items-center">
                 <div class="w-full border-t border-gray-300"></div>
             </div>
             <div class="relative flex justify-center">
-                <span class="bg-gradient-to-r from-gray-50 to-white px-6 text-gray-500 text-sm font-medium">
+                <span class="bg-white px-8 text-gray-500 text-lg font-medium animate-pulse">
+                    <i class="fas fa-star mr-2"></i>
                     {{ app()->getLocale() == 'ar' ? 'أو' : 'OR' }}
+                    <i class="fas fa-star ml-2"></i>
                 </span>
             </div>
         </div>
         
         <!-- Videos Section -->
-        <div class="flex justify-start">
+        <div>
             <!-- Section Header -->
-            <div class="w-auto text-right mb-12" data-aos="fade-up" data-aos-delay="200">
-                <h2 class="text-xl font-bold text-gray-900">
-                    <span class="text-purple-600">
-                        <i class="fas fa-video mr-2"></i>
-                        {{ app()->getLocale() == 'ar' ? 'فيديوهات' : 'Videos' }}
+            <div class="text-right mb-12" data-aos="fade-up">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+                    <span class="bg-gradient-to-r from-red-600 via-orange-600 to-red-700 bg-clip-text text-transparent animate-gradient">
+                        <i class="fas fa-video ml-4"></i>
+                        {{ app()->getLocale() == 'ar' ? 'معرض الفيديوهات' : 'Video Gallery' }}
                     </span>
                 </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-orange-600 ml-auto rounded-full animate-pulse"></div>
             </div>
             
             <!-- Videos Gallery -->
@@ -148,56 +168,67 @@
                     $projects = \App\Models\Portfolio::where('is_active', true)->get();
                 @endphp
                 @if($projects->count() > 0)
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                         @foreach($projects as $project)
                             @if($project->videos)
-                            <div class="relative group cursor-pointer transform transition-all duration-300 hover:scale-105" 
+                            <div class="group relative transform transition-all duration-500 hover:scale-105" 
+                                 data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}"
                                  onclick="openVideoLightbox('{{ asset('storage/' . $project->videos) }}', '{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}')">
                                 <!-- Video Container -->
-                                <div class="relative w-full h-40 overflow-hidden rounded-lg shadow-md border border-gray-200 bg-black">
-                                    <video class="w-full h-full object-cover" 
-                                           poster="{{ asset('storage/' . $project->videos) }}"
-                                           controls>
-                                        <source src="{{ asset('storage/' . $project->videos) }}" type="video/mp4">
-                                        {{ app()->getLocale() == 'ar' ? 'متصفحك لا يدعم تشغيل الفيديو' : 'Your browser does not support video playback' }}
-                                    </video>
-                                    
-                                    <!-- Video Badge -->
-                                    <div class="absolute top-2 left-2">
-                                        <span class="inline-flex items-center bg-purple-600 text-white px-2 py-0.5 rounded-full text-xs font-bold">
-                                            <i class="fas fa-video mr-1"></i>
-                                            {{ app()->getLocale() == 'ar' ? 'فيديو' : 'Video' }}
-                                        </span>
-                                    </div>
-                                    
-                                    <!-- Play Button -->
-                                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <div class="bg-white/90 backdrop-blur-sm text-purple-800 p-2 rounded-full shadow-md">
-                                            <i class="fas fa-play text-xs ml-0.5"></i>
+                                <div class="relative overflow-hidden rounded-2xl shadow-2xl bg-white border border-gray-200">
+                                    <div class="aspect-w-16 aspect-h-12">
+                                        <div class="relative h-64 bg-black">
+                                            <video class="w-full h-full object-cover" 
+                                                   poster="{{ asset('storage/' . $project->videos) }}"
+                                                   muted
+                                                   loop>
+                                                <source src="{{ asset('storage/' . $project->videos) }}" type="video/mp4">
+                                            </video>
+                                            
+                                            <!-- Video Overlay -->
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                                            
+                                            <!-- Play Button -->
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="bg-red-600 text-white p-4 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 hover:bg-red-700 hover:shadow-red-500/50 group-hover:animate-pulse">
+                                                    <i class="fas fa-play text-xl ml-1"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Video Badge -->
+                                            <div class="absolute top-4 left-4">
+                                                <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center animate-pulse">
+                                                    <i class="fas fa-video mr-2"></i>
+                                                    {{ app()->getLocale() == 'ar' ? 'فيديو' : 'Video' }}
+                                                </span>
+                                            </div>
+                                            
+                                            <!-- Project Title -->
+                                            <div class="absolute bottom-4 left-4 right-4">
+                                                <h3 class="text-white font-bold text-lg">
+                                                    {{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}
+                                                </h3>
+                                            </div>
                                         </div>
                                     </div>
                                     
-                                    <!-- Title -->
-                                    <div class="absolute bottom-0 left-0 right-0 p-2 text-white transform transition-all duration-300 group-hover:translate-y-0">
-                                        <h4 class="text-xs font-bold truncate">
-                                            {{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}
-                                        </h4>
-                                    </div>
+                                    <!-- Hover Effect -->
+                                    <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 </div>
                             </div>
                             @endif
                         @endforeach
                     </div>
                 @else
-                    <div class="text-center py-16 bg-white rounded-2xl shadow-lg border border-gray-200">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-50 to-purple-100 rounded-full mb-6 shadow-lg">
-                            <i class="fas fa-video text-purple-400 text-3xl"></i>
+                    <div class="text-center py-20 bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl border border-gray-200">
+                        <div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-red-100 to-orange-100 rounded-full mb-6 shadow-2xl shadow-red-200/50">
+                            <i class="fas fa-video text-red-600 text-4xl animate-pulse"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-3">
-                            {{ app()->getLocale() == 'ar' ? 'لا توجد فيديوهات حالياً' : 'No videos available' }}
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                            {{ app()->getLocale() == 'ar' ? 'سيتم إضافة الفيديوهات قريباً' : 'Videos Coming Soon' }}
                         </h3>
-                        <p class="text-gray-600">
-                            {{ app()->getLocale() == 'ar' ? 'سيتم إضافة الفيديوهات قريباً' : 'Videos will be added soon' }}
+                        <p class="text-gray-600 text-lg">
+                            {{ app()->getLocale() == 'ar' ? 'نحن نجهز أفضل فيديوهات أعمالنا لعرضها عليك' : 'We are preparing our best work videos to show you' }}
                         </p>
                     </div>
                 @endif
@@ -205,6 +236,61 @@
         </div>
     </div>
 </section>
+
+<!-- Custom Styles -->
+<style>
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 3s ease infinite;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gallery-items {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.5s ease-in-out;
+}
+
+.gallery-items.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.aspect-w-16 {
+    position: relative;
+    padding-bottom: calc(9 / 16 * 100%);
+}
+
+.aspect-h-12 > * {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.delay-1000 {
+    animation-delay: 1s;
+}
+</style>
 
 <!-- Stats Section -->
 <section class="py-20 bg-gradient-to-r from-gray-900 to-gray-800 text-white">

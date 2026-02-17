@@ -103,3 +103,31 @@
         </div>
     </div>
 </footer>
+
+<!-- Fixed Social Media Sidebar -->
+<div class="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 flex flex-col space-y-3 {{ app()->getLocale() === 'ar' ? 'space-y-reverse' : '' }}">
+    <!-- WhatsApp -->
+    <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد استفسار' : 'I have a question' }}" target="_blank" class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+        <i class="fab fa-whatsapp text-xl"></i>
+    </a>
+    
+    <!-- Phone -->
+    <a href="tel:+966500000000" class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+        <i class="fas fa-phone text-xl"></i>
+    </a>
+    
+    <!-- Instagram -->
+    <a href="#" class="w-12 h-12 bg-pink-500 text-white rounded-full flex items-center justify-center hover:bg-pink-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+        <i class="fab fa-instagram text-xl"></i>
+    </a>
+    
+    <!-- Facebook -->
+    <a href="#" class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 shadow-lg">
+        <i class="fab fa-facebook-f text-xl"></i>
+    </a>
+    
+    <!-- Twitter -->
+    <a href="#" class="w-12 h-12 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+        <i class="fab fa-twitter text-xl"></i>
+    </a>
+</div>

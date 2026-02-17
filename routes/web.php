@@ -146,11 +146,19 @@ Route::middleware('auth')->group(function () {
     // Products Routes
     Route::resource('admin-products', AdminProductsController::class);
 
+    // Social Media Routes
+    Route::get('/admin-social-media', [SocialMediaController::class, 'index'])->name('admin-social-media.index');
+    Route::get('/admin-social-media/create', [SocialMediaController::class, 'create'])->name('admin-social-media.create');
+    Route::post('/admin-social-media', [SocialMediaController::class, 'store'])->name('admin-social-media.store');
+    Route::get('/admin-social-media/{socialMedia}/edit', [SocialMediaController::class, 'edit'])->name('admin-social-media.edit');
+    Route::put('/admin-social-media/{socialMedia}', [SocialMediaController::class, 'update'])->name('admin-social-media.update');
+    Route::delete('/admin-social-media/{socialMedia}', [SocialMediaController::class, 'destroy'])->name('admin-social-media.destroy');
+
     // Static Contents Routes
     Route::get('/admin-static-contents', [AdminStaticContentsController::class, 'index'])->name('admin-static-contents.index');
     Route::post('/admin-static-contents', [AdminStaticContentsController::class, 'update'])->name('admin-static-contents.update');
     Route::get('/admin-static-contents/create-default', [AdminStaticContentsController::class, 'createDefaultContent'])->name('admin-static-contents.create-default');
-
+    Route::delete('/admin-static-contents/{content}', [AdminStaticContentsController::class, 'destroy'])->name('admin-static-contents.destroy');
 });
 
 require __DIR__.'/auth.php';

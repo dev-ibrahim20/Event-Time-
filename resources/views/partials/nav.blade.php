@@ -52,7 +52,7 @@
                     <span class="font-medium">{{ app()->getLocale() == 'ar' ? 'تواصل واتساب' : 'Contact WhatsApp' }}</span>
                 </a>
             </div>
-
+            
             <!-- Mobile Menu Button -->
             <button @click="isOpen = !isOpen" class="lg:hidden text-gray-700 hover:text-red-600 transition-colors">
                 <i class="fas fa-bars text-xl"></i>
@@ -112,7 +112,7 @@
             </a>
             <a href="{{ route('gallery') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2 px-4">
                 <i class="fas fa-images mr-3"></i>
-                {{ app()->getLocale() == 'ar' ? 'معرض الأعمال' : 'Gallery' }}
+                {{ app()->getLocale() == 'ar' ? 'اعمالنا' : 'Our Work' }}
             </a>
             <a href="{{ route('about') }}" class="block text-gray-700 hover:text-red-600 transition-colors font-medium py-2 px-4">
                 <i class="fas fa-info-circle mr-3"></i>
@@ -128,9 +128,9 @@
                     <i class="fas fa-phone"></i>
                     <span class="font-medium">{{ app()->getLocale() == 'ar' ? 'اتصال سريع' : 'Quick Call' }}</span>
                 </a>
-                <a href="{{ route('quote') }}" class="block text-center bg-gradient-to-r from-red-600 to-red-800 text-white px-6 py-3 rounded-lg hover:from-red-700 hover:to-red-900 transition-all duration-300">
-                    <i class="fas fa-file-invoice mr-2"></i>
-                    <span class="font-medium">{{ app()->getLocale() == 'ar' ? 'طلب عرض سعر' : 'Request Quote' }}</span>
+                <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد طلب عرض سعر' : 'I want to request a quote' }}" target="_blank" class="block text-center bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-3 rounded-lg hover:from-green-600 hover:to-green-800 transition-all duration-300">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    <span class="font-medium">{{ app()->getLocale() == 'ar' ? 'تواصل عبر واتساب' : 'Contact via WhatsApp' }}</span>
                 </a>
             </div>
         </div>
