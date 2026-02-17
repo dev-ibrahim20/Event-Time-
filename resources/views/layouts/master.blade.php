@@ -93,36 +93,41 @@
     @include('partials.footer')
     
     <!-- Social Media Toggle Button -->
-    <button id="social-toggle" class="fixed left-4 top-4 bg-gray-800 text-white p-3 rounded-full shadow-lg z-[9998] hover:bg-gray-700 transition-all duration-300 transform hover:scale-110" onclick="toggleSocialSidebar()" style="position: fixed !important; left: 0.5rem !important; top: 14rem !important; z-index: 9998 !important;">
-        <i class="fas fa-share-alt text-lg"></i>
+    <button id="social-toggle" class="fixed left-4 top-4 bg-gray-800 text-white p-3 rounded-full shadow-lg z-[9998] hover:bg-gray-700 transition-all duration-300 transform hover:scale-110" style="position: fixed !important; left: 0.5rem !important; top: 14rem !important; z-index: 9998 !important;">
+        <i class="fas fa-times text-lg"></i>
     </button>
     
     <!-- Social Media Sidebar -->
-    <div id="social-sidebar" class="fixed left-4 top-1/2 transform -translate-y-1/2 z-[9999] !important flex flex-col space-y-4 {{ app()->getLocale() === 'ar' ? 'space-y-reverse' : '' }} bg-gradient-to-br from-black via-gray-900 to-black  rounded-3xl p-6 shadow-2xl min-w-[180px] opacity-0 transition-all duration-500 hover:opacity-100" style="position: fixed !important; left: -1rem !important; top: 16rem !important; z-index: 9999 !important;" onmouseenter="this.style.opacity='1'; this.style.transition='opacity 0.5s'" onmouseleave="this.style.opacity='0'; this.style.transition='opacity 0.5s'">
+    <div id="social-sidebar" class="fixed left-4 top-1/2 transform -translate-y-1/2 z-[9999] !important flex flex-col space-y-4 {{ app()->getLocale() === 'ar' ? 'space-y-reverse' : '' }} bg-gradient-to-br from-black via-gray-900 to-black  rounded-3xl p-6 shadow-2xl min-w-[180px] transition-all duration-500" style="position: fixed !important; left: -1rem !important; top: 16rem !important; z-index: 9999 !important; opacity: 1;" onmouseenter="this.style.opacity='1'; this.style.transition='opacity 0.5s'" onmouseleave="this.style.opacity='0'; this.style.transition='opacity 0.5s'">
         
         <!-- WhatsApp -->
-        <a href="https://wa.me/966500000000" target="_blank" class="w-16 h-16 bg-green-500 text-white rounded-2xl flex items-center justify-center hover:bg-green-600 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('https://wa.me/966500000000', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-whatsapp').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-whatsapp').style.transform='rotate(0deg) scale(1)'">
-            <i class="fab fa-whatsapp text-2xl group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
+        <a href="https://wa.me/966500000000?text={{ app()->getLocale() == 'ar' ? 'أريد استفسار عن خدماتكم' : 'I want to inquire about your services' }}" target="_blank" class="w-12 h-12 bg-green-600 text-white rounded-2xl flex items-center justify-center hover:bg-green-700 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('https://wa.me/966500000000?text={{ app()->getLocale() == 'ar' ? 'أريد استفسار عن خدماتكم' : 'I want to inquire about your services' }}', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-whatsapp').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-whatsapp').style.transform='rotate(0deg) scale(1)'">
+            <i class="fab fa-whatsapp text-lg group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
         </a>
         
         <!-- Phone -->
-        <a href="tel:+966500000000" target="_blank" class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('tel:+966500000000', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-phone').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-phone').style.transform='rotate(0deg) scale(1)'">
-            <i class="fas fa-phone text-2xl group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
+        <a href="tel:+966500000000" target="_blank" class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('tel:+966500000000', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-phone').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-phone').style.transform='rotate(0deg) scale(1)'">
+            <i class="fas fa-phone text-lg group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
         </a>
         
         <!-- Instagram -->
-        <a href="#" class="w-16 h-16 bg-pink-500 text-white rounded-2xl flex items-center justify-center hover:bg-pink-600 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('https://instagram.com/yourprofile', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-instagram').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-instagram').style.transform='rotate(0deg) scale(1)'">
-            <i class="fab fa-instagram text-2xl group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
+        <a href="#" class="w-12 h-12 bg-red-600 text-white rounded-2xl flex items-center justify-center hover:bg-red-600 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('https://instagram.com/yourprofile', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-instagram').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-instagram').style.transform='rotate(0deg) scale(1)'">
+            <i class="fab fa-instagram text-lg group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
         </a>
         
         <!-- Facebook -->
-        <a href="#" class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('https://facebook.com/yourpage', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-facebook-f').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-facebook-f').style.transform='rotate(0deg) scale(1)'">
-            <i class="fab fa-facebook-f text-2xl group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
+        <a href="#" class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center hover:bg-blue-700 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('https://facebook.com/yourpage', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-facebook-f').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-facebook-f').style.transform='rotate(0deg) scale(1)'">
+            <i class="fab fa-facebook-f text-lg group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
         </a>
         
         <!-- Twitter -->
-        <a href="#" class="w-16 h-16 bg-sky-500 text-white rounded-2xl flex items-center justify-center hover:bg-sky-600 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('https://twitter.com/yourprofile', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-twitter').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-twitter').style.transform='rotate(0deg) scale(1)'">
-            <i class="fab fa-twitter text-2xl group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
+        <a href="#" class="w-12 h-12 bg-sky-500 text-white rounded-2xl flex items-center justify-center hover:bg-sky-600 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('https://twitter.com/yourprofile', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-twitter').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-twitter').style.transform='rotate(0deg) scale(1)'">
+            <i class="fab fa-twitter text-lg group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
+        </a>
+        
+        <!-- TikTok -->
+        <a href="#" class="w-12 h-12 bg-black text-white rounded-2xl flex items-center justify-center hover:bg-gray-800 transition-all duration-300 transform hover:scale-110 shadow-2xl group relative overflow-hidden" onclick="window.open('https://tiktok.com/@yourprofile', '_blank')" onmouseenter="this.querySelector('#social-sidebar .fa-tiktok').style.transform='rotate(15deg) scale(1.2)'" onmouseleave="this.querySelector('#social-sidebar .fa-tiktok').style.transform='rotate(0deg) scale(1)'">
+            <i class="fab fa-tiktok text-lg group-hover:rotate-12 transition-transform duration-300 relative z-10"></i>    
         </a>
     </div>
     
@@ -134,105 +139,127 @@
     
     <!-- Social Media Notifications -->
     <script>
-        // Show notification when social media is clicked
-        function showSocialNotification(platform, message) {
-            const container = document.getElementById('notification-container');
-            if (container) {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show notification function
+            function showSocialNotification(platform, message) {
                 const notification = document.createElement('div');
-                notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-[10001] transition-all duration-300 transform translate-x-0';
+                notification.className = 'bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-lg shadow-xl mb-4 transform translate-x-full transition-all duration-500 flex items-center';
+                notification.style.transform = 'translateX(0)';
+                
+                let icon = '';
+                let color = '';
+                
+                switch(platform) {
+                    case 'whatsapp':
+                        icon = 'fab fa-whatsapp';
+                        color = 'text-green-300';
+                        break;
+                    case 'phone':
+                        icon = 'fas fa-phone';
+                        color = 'text-blue-300';
+                        break;
+                    case 'instagram':
+                        icon = 'fab fa-instagram';
+                        color = 'text-pink-300';
+                        break;
+                    case 'facebook':
+                        icon = 'fab fa-facebook-f';
+                        color = 'text-blue-300';
+                        break;
+                    case 'twitter':
+                        icon = 'fab fa-twitter';
+                        color = 'text-sky-300';
+                        break;
+                    case 'tiktok':
+                        icon = 'fab fa-tiktok';
+                        color = 'text-gray-300';
+                        break;
+                }
+                
                 notification.innerHTML = `
-                    <div class="flex items-center">
-                        <i class="fab fa-${platform} mr-2"></i>
-                        <div class="text-left">
-                            <span class="font-medium">${message}</span>
-                            <div class="text-xs text-green-200 mt-1">{{ app()->getLocale() == "ar" ? "من جهازك" : "From your device" }}</div>
-                        </div>
+                    <i class="${icon} ${color} text-xl ml-3"></i>
+                    <span class="font-medium">${message}</span>
+                    <div class="ml-auto">
+                        <i class="fas fa-check-circle text-green-300"></i>
                     </div>
                 `;
-                container.appendChild(notification);
                 
-                // Auto remove after 3 seconds
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 3000);
-            }
-        }
-        
-        // Toggle social sidebar
-        function toggleSocialSidebar() {
-            const sidebar = document.getElementById('social-sidebar');
-            const toggle = document.getElementById('social-toggle');
-            
-            if (sidebar && toggle) {
-                if (sidebar.style.opacity === '0' || sidebar.style.opacity === '0') {
-                    // Show sidebar
-                    sidebar.style.opacity = '1';
-                    sidebar.style.transition = 'opacity 0.5s';
-                    toggle.innerHTML = '<i class="fas fa-times text-lg"></i>';
-                    toggle.className = 'fixed left-4 top-4 bg-gray-600 text-white p-3 rounded-full shadow-lg z-[9998] hover:bg-gray-700 transition-all duration-300 transform hover:scale-110';
-                } else {
-                    // Hide sidebar
-                    sidebar.style.opacity = '0';
-                    sidebar.style.transition = 'opacity 0.5s';
-                    toggle.innerHTML = '<i class="fas fa-share-alt text-lg"></i>';
-                    toggle.className = 'fixed left-4 top-4 bg-gray-800 text-white p-3 rounded-full shadow-lg z-[9998] hover:bg-gray-700 transition-all duration-300 transform hover:scale-110';
+                const container = document.getElementById('notification-container');
+                if (container) {
+                    container.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(100%)';
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 500);
+                    }, 3000);
                 }
             }
-        }
-        
-        // Enhanced click handlers with notifications
-        document.addEventListener('DOMContentLoaded', function() {
-            // WhatsApp
-            const whatsappLinks = document.querySelectorAll('#social-sidebar a[href*="wa.me"]');
-            whatsappLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.open(this.href, '_blank');
-                    showSocialNotification('whatsapp', '{{ app()->getLocale() == "ar" ? "جاري فتح واتساب" : "Opening WhatsApp" }}');
-                });
-            });
             
-            // Phone
-            const phoneLinks = document.querySelectorAll('#social-sidebar a[href*="tel:"]');
-            phoneLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.open(this.href, '_blank');
-                    showSocialNotification('phone', '{{ app()->getLocale() == "ar" ? "جاري الاتصال" : "Opening Phone" }}');
-                });
-            });
+            // Auto-hide sidebar after 1 minute
+            let sidebarTimer;
+            const sidebar = document.getElementById('social-sidebar');
+            const toggleBtn = document.getElementById('social-toggle');
+            let isSidebarVisible = true;
             
-            // Instagram
-            const instagramLinks = document.querySelectorAll('#social-sidebar a[href*="instagram"]');
-            instagramLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.open(this.href, '_blank');
-                    showSocialNotification('instagram', '{{ app()->getLocale() == "ar" ? "جاري فتح انستجرام" : "Opening Instagram" }}');
+            // Show sidebar on page load
+            if (sidebar) {
+                sidebar.style.opacity = '1';
+                isSidebarVisible = true;
+                
+                // Toggle button functionality
+                if (toggleBtn) {
+                    toggleBtn.addEventListener('click', () => {
+                        if (isSidebarVisible) {
+                            sidebar.style.opacity = '0';
+                            isSidebarVisible = false;
+                            toggleBtn.innerHTML = '<i class="fas fa-share-alt text-lg"></i>';
+                        } else {
+                            sidebar.style.opacity = '1';
+                            isSidebarVisible = true;
+                            toggleBtn.innerHTML = '<i class="fas fa-times text-lg"></i>';
+                            // Reset timer when showing
+                            clearTimeout(sidebarTimer);
+                            sidebarTimer = setTimeout(() => {
+                                sidebar.style.opacity = '0';
+                                isSidebarVisible = false;
+                                toggleBtn.innerHTML = '<i class="fas fa-share-alt text-lg"></i>';
+                            }, 20000);
+                        }
+                    });
+                }
+                
+                // Start timer to hide after 20 seconds
+                sidebarTimer = setTimeout(() => {
+                    sidebar.style.opacity = '0';
+                    isSidebarVisible = false;
+                    if (toggleBtn) {
+                        toggleBtn.innerHTML = '<i class="fas fa-share-alt text-lg"></i>';
+                    }
+                }, 20000); // 20 seconds
+                
+                // Reset timer on mouse enter
+                sidebar.addEventListener('mouseenter', () => {
+                    clearTimeout(sidebarTimer);
+                    sidebar.style.opacity = '1';
+                    isSidebarVisible = true;
+                    if (toggleBtn) {
+                        toggleBtn.innerHTML = '<i class="fas fa-times text-lg"></i>';
+                    }
                 });
-            });
-            
-            // Facebook
-            const facebookLinks = document.querySelectorAll('#social-sidebar a[href*="facebook"]');
-            facebookLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.open(this.href, '_blank');
-                    showSocialNotification('facebook', '{{ app()->getLocale() == "ar" ? "جاري فتح فيسبوك" : "Opening Facebook" }}');
+                
+                // Restart timer on mouse leave
+                sidebar.addEventListener('mouseleave', () => {
+                    sidebarTimer = setTimeout(() => {
+                        sidebar.style.opacity = '0';
+                        isSidebarVisible = false;
+                        if (toggleBtn) {
+                            toggleBtn.innerHTML = '<i class="fas fa-share-alt text-lg"></i>';
+                        }
+                    }, 20000);
                 });
-            });
-            
-            // Twitter
-            const twitterLinks = document.querySelectorAll('#social-sidebar a[href*="twitter"]');
-            twitterLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.open(this.href, '_blank');
-                    showSocialNotification('twitter', '{{ app()->getLocale() == "ar" ? "جاري فتح تويتر" : "Opening Twitter" }}');
-                });
-            });
+            }
         });
     </script>
     

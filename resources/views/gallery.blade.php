@@ -79,23 +79,23 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                         @foreach($projects as $project)
                             @if($project->images)
-                            <div class="group relative transform transition-all duration-500 hover:scale-105" 
+                            <div class="group relative transform transition-all duration-700 hover:scale-105 hover:rotate-1" 
                                  data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}"
                                  onclick="openLightbox('{{ asset('storage/' . $project->images) }}', '{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}', '{{ app()->getLocale() == 'ar' ? $project->description_ar : $project->description_en }}')">
                                 <!-- Image Container -->
-                                <div class="relative overflow-hidden rounded-2xl shadow-2xl bg-white border border-gray-200">
+                                <div class="relative overflow-hidden rounded-2xl shadow-xl bg-white border border-gray-200 hover:shadow-2xl hover:border-blue-300 transition-all duration-500">
                                     <div class="aspect-w-16 aspect-h-12">
                                         <img src="{{ asset('storage/' . $project->images) }}" 
                                              alt="{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}" 
-                                             class="w-full h-64 object-cover transition-all duration-700 group-hover:scale-110">
+                                             class="w-full h-64 object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110 group-hover:contrast-110">
                                     </div>
                                     
                                     <!-- Gradient Overlay -->
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                     
                                     <!-- Floating Action Buttons -->
-                                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0">
-                                        <div class="bg-white/90 backdrop-blur-sm text-gray-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all duration-300">
+                                    <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-4 group-hover:translate-x-0 group-hover:scale-110">
+                                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-3 rounded-full shadow-lg hover:from-blue-600 hover:to-blue-700 hover:scale-110 transition-all duration-300">
                                             <i class="fas fa-search-plus"></i>
                                         </div>
                                     </div>
@@ -111,7 +111,10 @@
                                     </div>
                                     
                                     <!-- Shimmer Effect -->
-                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                                    
+                                    <!-- Border Glow Effect -->
+                                    <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-400 transition-all duration-500"></div>
                                 </div>
                             </div>
                             @endif
@@ -171,14 +174,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                         @foreach($projects as $project)
                             @if($project->videos)
-                            <div class="group relative transform transition-all duration-500 hover:scale-105" 
+                            <div class="group relative transform transition-all duration-700 hover:scale-105 hover:rotate-1" 
                                  data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}"
                                  onclick="openVideoLightbox('{{ asset('storage/' . $project->videos) }}', '{{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}')">
                                 <!-- Video Container -->
-                                <div class="relative overflow-hidden rounded-2xl shadow-2xl bg-white border border-gray-200">
+                                <div class="relative overflow-hidden rounded-2xl shadow-xl bg-white border border-gray-200 hover:shadow-2xl hover:border-red-300 transition-all duration-500">
                                     <div class="aspect-w-16 aspect-h-12">
                                         <div class="relative h-64 bg-black">
-                                            <video class="w-full h-full object-cover" 
+                                            <video class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110 group-hover:contrast-110" 
                                                    poster="{{ asset('storage/' . $project->videos) }}"
                                                    muted
                                                    loop>
@@ -186,25 +189,25 @@
                                             </video>
                                             
                                             <!-- Video Overlay -->
-                                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                             
                                             <!-- Play Button -->
                                             <div class="absolute inset-0 flex items-center justify-center">
-                                                <div class="bg-red-600 text-white p-4 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 hover:bg-red-700 hover:shadow-red-500/50 group-hover:animate-pulse">
+                                                <div class="bg-gradient-to-r from-red-500 to-red-600 text-white p-4 rounded-full shadow-xl transform transition-all duration-300 hover:scale-110 hover:from-red-600 hover:to-red-700 hover:shadow-red-500/50 group-hover:animate-pulse group-hover:scale-125">
                                                     <i class="fas fa-play text-xl ml-1"></i>
                                                 </div>
                                             </div>
                                             
                                             <!-- Video Badge -->
-                                            <div class="absolute top-4 left-4">
-                                                <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center animate-pulse">
+                                            <div class="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-500 transform -translate-y-4 group-hover:translate-y-0">
+                                                <span class="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center animate-pulse">
                                                     <i class="fas fa-video mr-2"></i>
                                                     {{ app()->getLocale() == 'ar' ? 'فيديو' : 'Video' }}
                                                 </span>
                                             </div>
                                             
                                             <!-- Project Title -->
-                                            <div class="absolute bottom-4 left-4 right-4">
+                                            <div class="absolute bottom-4 left-4 right-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
                                                 <h3 class="text-white font-bold text-lg">
                                                     {{ app()->getLocale() == 'ar' ? $project->title_ar : $project->title_en }}
                                                 </h3>
@@ -213,7 +216,10 @@
                                     </div>
                                     
                                     <!-- Hover Effect -->
-                                    <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-red-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    
+                                    <!-- Border Glow Effect -->
+                                    <div class="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-red-400 transition-all duration-500"></div>
                                 </div>
                             </div>
                             @endif
