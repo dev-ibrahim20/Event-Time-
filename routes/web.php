@@ -64,7 +64,15 @@ Route::get('language/{locale}', function ($locale) {
     })->name('gallery');
 
     Route::get('quote', [QuoteRequestsController::class, 'create'])->name('quote');
-
+    
+    Route::get('service-details/{service}', function ($service) {
+        $service = \App\Models\Service::where('slug', $service)->first();
+        if (!$service) {
+            abort(404);
+        }
+        return view('service-details', compact('service'));
+    })->name('service-details');
+    
     Route::post('quote-request', [QuoteRequestsController::class, 'store'])->name('quote-request.submit');
 
     Route::post('api/quote-request', [QuoteRequestsController::class, 'store']);

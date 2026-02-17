@@ -73,7 +73,7 @@
                             @if($index < 3) <!-- Show only first 3 features -->
                             <div class="flex items-start space-x-2 space-x-reverse">
                                 <i class="fas fa-check-circle text-red-600 text-sm mt-0.5 flex-shrink-0"></i>
-                                <p class="text-sm text-gray-600 line-clamp-1">{{ app()->getLocale() == 'ar' ? $feature->title_ar : $feature->title_en }}</p>
+                                <p class="text-sm text-gray-600 line-clamp-1">{{ $feature }}</p>
                             </div>
                             @endif
                         @endforeach
@@ -86,6 +86,11 @@
                            class="flex-1 bg-gradient-to-r border-x-green-600 from-red-800 to-red-800 text-red px-4 py-2 rounded-lg hover:bg-green-600 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg font-medium text-sm text-center">
                             <i class="fab fa-whatsapp mr-1"></i>
                             {{ app()->getLocale() == 'ar' ? 'تواصل واتساب' : 'Contact WhatsApp' }}
+                        </a>
+                        <a href="{{ route('service-details', ['service' => $service->slug]) }}" 
+                           class="flex-1 border-2 border-red-600 text-red-600 px-4 py-2 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-300 font-medium text-sm text-center">
+                            <i class="fas fa-shopping-cart mr-1"></i>
+                            {{ app()->getLocale() == 'ar' ? 'تفاصيل الخدمة' : 'Service Details' }}
                         </a>
                         <a href="{{ route('gallery') }}" 
                            class="flex-1 border-2 border-red-600 text-red-600 px-4 py-2 rounded-lg hover:bg-red-600 hover:text-white transition-all duration-300 font-medium text-sm text-center">

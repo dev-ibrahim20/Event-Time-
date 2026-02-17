@@ -4,11 +4,9 @@
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : '' }}">
-                    <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-calendar-alt text-white text-xl"></i>
-                    </div>
+                    <img src="{{ asset('assets/images/logo-even.jpeg') }}" alt="" class="w-10 h-10">
                     <div class="ml-3">
-                        <h1 class="text-xl font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'وقت الحدث' : 'Event Time' }}</h1>
+                        <h1 class="text-lg font-bold text-gray-900">{{ app()->getLocale() == 'ar' ? 'وقت الحدث' : 'Event Time' }}</h1>
                     </div>
                 </a>
             </div>

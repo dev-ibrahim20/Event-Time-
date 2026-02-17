@@ -5,9 +5,7 @@
             <!-- Company Info -->
             <div class="space-y-4">
                 <div class="flex items-center space-x-3 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : '' }}">
-                    <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-800 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-calendar-alt text-white text-xl"></i>
-                    </div>
+                    <img src="{{ asset('assets/images/logo-even.jpeg') }}" alt="" class="w-10 h-10">
                     <div>
                         <h3 class="text-xl font-bold">{{ app()->getLocale() == 'ar' ? 'وقت الحدث' : 'Event Time' }}</h3>
                         <p class="text-sm text-gray-400">Event Time</p>

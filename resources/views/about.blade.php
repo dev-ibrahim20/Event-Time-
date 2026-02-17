@@ -185,7 +185,7 @@
 </section>
 
 <!-- Team Section -->
-<section class="py-20 bg-gray-50">
+{{-- <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12" data-aos="fade-up">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -261,7 +261,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 <!-- CTA Section -->
 <section class="py-20 bg-gradient-to-r from-red-600 to-red-800 text-white">
