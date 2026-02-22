@@ -103,7 +103,7 @@
 </footer>
 
 <!-- Fixed Social Media Sidebar -->
-<div class="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 flex flex-col space-y-3 {{ app()->getLocale() === 'ar' ? 'space-y-reverse' : '' }}">
+<div class="fixed {{ app()->getLocale() === 'ar' ? 'left-4' : 'right-4' }} top-1/2 transform -translate-y-1/2 z-40 flex flex-col space-y-3">
     <!-- WhatsApp -->
     <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد استفسار' : 'I have a question' }}" target="_blank" class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
         <i class="fab fa-whatsapp text-xl"></i>
