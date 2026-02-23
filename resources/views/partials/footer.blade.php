@@ -27,6 +27,9 @@
                     <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
                 </div>
             </div>
 
@@ -127,5 +130,10 @@
     <!-- Twitter -->
     <a href="#" class="w-12 h-12 bg-sky-500 text-white rounded-full flex items-center justify-center hover:bg-sky-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
         <i class="fab fa-twitter text-xl"></i>
+    </a>
+    
+    <!-- TikTok -->
+    <a href="#" class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-300 transform hover:scale-110 shadow-lg">
+        <i class="fab fa-tiktok text-xl"></i>
     </a>
 </div>
