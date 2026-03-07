@@ -283,64 +283,32 @@ function openImageModal(imageSrc, title) {
     $('#imageModal').modal('show');
 }
 
-// Show gallery using service ID - طريقة مباشرة وسهلة
+// Show gallery using service ID - طريقة ديناميكية من قاعدة البيانات
 function showGallery(serviceId) {
     console.log('جاري عرض معرض الصور للخدمة رقم:', serviceId);
     
-    // بيانات تجريبية للخدمات - سنضع الصور مباشرة هنا
-    var galleries = {
-        7: [
-            '{{ asset("assets/img/photos/2.jpg") }}',
-            '{{ asset("assets/img/photos/3.jpg") }}',
-            '{{ asset("assets/img/photos/4.jpg") }}'
-        ],
-        8: [
-            '{{ asset("assets/img/photos/2.jpg") }}',
-            '{{ asset("assets/img/photos/3.jpg") }}',
-            '{{ asset("assets/img/photos/4.jpg") }}'
-        ],
-        9: [
-            '{{ asset("assets/img/photos/2.jpg") }}',
-            '{{ asset("assets/img/photos/3.jpg") }}',
-            '{{ asset("assets/img/photos/4.jpg") }}'
-        ],
-        10: [
-            '{{ asset("assets/img/photos/2.jpg") }}',
-            '{{ asset("assets/img/photos/3.jpg") }}',
-            '{{ asset("assets/img/photos/4.jpg") }}'
-        ],
-        11: [
-            '{{ asset("assets/img/photos/2.jpg") }}',
-            '{{ asset("assets/img/photos/3.jpg") }}',
-            '{{ asset("assets/img/photos/4.jpg") }}'
-        ],
-        12: [
-            '{{ asset("assets/images/services/gallery/1770987333_698f1f4538b1d.png") }}',
-            '{{ asset("assets/images/services/gallery/1770987333_698f1f453d592.png") }}',
-            '{{ asset("assets/images/services/gallery/1770987333_698f1f453dc23.png") }}'
-        ],
-        14: [
-            '{{ asset("assets/images/services/gallery/1770990124_698f2a2cacd58.png") }}',
-            '{{ asset("assets/images/services/gallery/1770990124_698f2a2cad895.png") }}',
-            '{{ asset("assets/images/services/gallery/1770990124_698f2a2cae3aa.png") }}',
-            '{{ asset("assets/images/services/gallery/1770990124_698f2a2cb297f.png") }}'
-        ]
-    };
-    
-    lightboxImages = galleries[serviceId] || [];
-    lightboxIndex = 0;
-    
-    if (lightboxImages.length === 0) {
-        alert('لا توجد صور في المعرض');
-        return;
-    }
-    
-    console.log('الصور التي سيتم عرضها:', lightboxImages);
-    
-    updateLightbox();
-    $('#galleryLightbox').show();
-    
-    console.log('تم فتح معرض الصور بنجاح');
+    // جلب بيانات المعرض من قاعدة البيانات
+    fetch(`/admin/services/${serviceId}/gallery`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.images && data.images.length > 0) {
+                lightboxImages = data.images;
+                lightboxIndex = 0;
+                
+                console.log('الصور التي سيتم عرضها:', lightboxImages);
+                
+                updateLightbox();
+                $('#galleryLightbox').show();
+                
+                console.log('تم فتح معرض الصور بنجاح');
+            } else {
+                alert('لا توجد صور في المعرض');
+            }
+        })
+        .catch(error => {
+            console.error('خطأ في جلب الصور:', error);
+            alert('حدث خطأ أثناء تحميل الصور');
+        });
 }
 
 // Update lightbox display

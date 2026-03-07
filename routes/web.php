@@ -103,6 +103,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin-services/create', [ServicesController::class, 'create'])->name('admin-services.create');
     Route::post('/admin-services', [ServicesController::class, 'store'])->name('admin-services.store');
     Route::resource('admin-services', ServicesController::class)->except(['create', 'store']);
+    Route::get('/admin/services/{id}/gallery', [ServicesController::class, 'getGallery'])->name('admin.services.gallery');
 
     Route::get('/admin-contact-messages', [ContactMessagesController::class, 'index'])->name('admin-contact-messages.index');
     Route::delete('/admin-contact-messages/{id}', [ContactMessagesController::class, 'destroy'])->name('admin-contact-messages.destroy');

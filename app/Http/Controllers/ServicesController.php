@@ -147,6 +147,37 @@ class ServicesController extends Controller
     }
 
     /**
+     * Get service gallery images
+     */
+    public function getGallery(string $id)
+    {
+        $service = Service::findOrFail($id);
+        
+        $gallery = $service->gallery_images;
+        if (is_string($gallery)) {
+            $gallery = json_decode($gallery, true);
+        }
+        
+        if (!is_array($gallery) || empty($gallery)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'لا توجد صور في المعرض'
+            ]);
+        }
+        
+        // Convert image paths to full URLs
+        $galleryUrls = array_map(function($image) {
+            return asset($image);
+        }, $gallery);
+        
+        return response()->json([
+            'success' => true,
+            'images' => $galleryUrls,
+            'count' => count($galleryUrls)
+        ]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
