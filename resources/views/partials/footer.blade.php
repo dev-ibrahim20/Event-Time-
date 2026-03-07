@@ -57,10 +57,10 @@
                             </a>
                             @endif
                             
-                            @if ($social->name == 'twitter')
+                            @if ($social->name == 'x')
                             <!-- Twitter -->
                             @php
-                                $url = \App\Models\SocialMedia::where('name', 'twitter')->first()->url ?? '/';
+                                $url = \App\Models\SocialMedia::where('name', 'x')->first()->url ?? '/';
                             @endphp
                             <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
                                 <i class="fab fa-twitter text-xl"></i>
@@ -72,7 +72,7 @@
                                 @php
                                     $url = \App\Models\SocialMedia::where('name', 'tiktok')->first()->url ?? '/';
                                 @endphp
-                            <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-black-500 text-white rounded-full flex items-center justify-center hover:bg-black-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+                            <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-300 transform hover:scale-110 shadow-lg">
                                 <i class="fab fa-tiktok text-xl"></i>
                             </a>
                             @endif
@@ -84,6 +84,36 @@
                                 @endphp
                             <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center hover:bg-yellow-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
                                 <i class="fab fa-snapchat-ghost text-xl"></i>
+                            </a>
+                            @endif
+                            
+                            @if ($social->name == 'linkedin')
+                            <!-- LinkedIn -->
+                                @php
+                                    $url = \App\Models\SocialMedia::where('name', 'linkedin')->first()->url ?? '/';
+                                @endphp
+                            <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-all duration-300 transform hover:scale-110 shadow-lg">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            @endif
+                            
+                            @if ($social->name == 'youtube')
+                            <!-- YouTube -->
+                                @php
+                                    $url = \App\Models\SocialMedia::where('name', 'youtube')->first()->url ?? '/';
+                                @endphp
+                            <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-all duration-300 transform hover:scale-110 shadow-lg">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                            @endif
+                            
+                            @if ($social->name == 'haraj')
+                            <!-- Haraj -->
+                                @php
+                                    $url = \App\Models\SocialMedia::where('name', 'haraj')->first()->url ?? '/';
+                                @endphp
+                            <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center hover:bg-orange-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+                                <i class="fas fa-shopping-cart text-xl"></i>
                             </a>
                             @endif
 
@@ -105,6 +135,12 @@
                         </a>
                         <a href="#" onclick="location.reload()" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
                             <i class="fab fa-tiktok"></i>
+                        </a>
+                        <a href="#" onclick="location.reload()" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" onclick="location.reload()" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors">
+                            <i class="fas fa-shopping-cart"></i>
                         </a>
                     @endif
                 </div>
@@ -228,10 +264,10 @@
         </a>
         @endif
         
-        @if ($social->name == 'twitter')
+        @if ($social->name == 'x')
         <!-- Twitter -->
         @php
-            $url = \App\Models\SocialMedia::where('name', 'twitter')->first()->url ?? '/';
+            $url = \App\Models\SocialMedia::where('name', 'x')->first()->url ?? '/';
         @endphp
         <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
             <i class="fab fa-twitter text-xl"></i>
@@ -243,7 +279,7 @@
             @php
                 $url = \App\Models\SocialMedia::where('name', 'tiktok')->first()->url ?? '/';
             @endphp
-        <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-black-500 text-white rounded-full flex items-center justify-center hover:bg-black-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+        <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-black text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-all duration-300 transform hover:scale-110 shadow-lg">
             <i class="fab fa-tiktok text-xl"></i>
         </a>
         @endif
@@ -255,6 +291,36 @@
             @endphp
         <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center hover:bg-yellow-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
             <i class="fab fa-snapchat-ghost text-xl"></i>
+        </a>
+        @endif
+        
+        @if ($social->name == 'linkedin')
+        <!-- LinkedIn -->
+            @php
+                $url = \App\Models\SocialMedia::where('name', 'linkedin')->first()->url ?? '/';
+            @endphp
+        <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-all duration-300 transform hover:scale-110 shadow-lg">
+            <i class="fab fa-linkedin-in text-xl"></i>
+        </a>
+        @endif
+        
+        @if ($social->name == 'youtube')
+        <!-- YouTube -->
+            @php
+                $url = \App\Models\SocialMedia::where('name', 'youtube')->first()->url ?? '/';
+            @endphp
+        <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-all duration-300 transform hover:scale-110 shadow-lg">
+            <i class="fab fa-youtube text-xl"></i>
+        </a>
+        @endif
+        
+        @if ($social->name == 'haraj')
+        <!-- Haraj -->
+            @php
+                $url = \App\Models\SocialMedia::where('name', 'haraj')->first()->url ?? '/';
+            @endphp
+        <a href="{{ $url }}" target="_blank" class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center hover:bg-orange-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+            <i class="fas fa-shopping-cart text-xl"></i>
         </a>
         @endif
 
