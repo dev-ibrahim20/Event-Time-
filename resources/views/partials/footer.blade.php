@@ -25,8 +25,8 @@
                     @foreach($sidebarSocialLinks as $social)
                                @if ($social->name == 'whatsapp')
                                <!-- WhatsApp -->
-                            <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد استفسار' : 'I have a question' }}" target="_blank" class="w-12 h-12 bg-gray-800 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
-                                <i class="fab fa-whatsapp text-xl"></i>
+                            <a href="https://wa.me/201234567890?text={{ app()->getLocale() == 'ar' ? 'أريد استفسار' : 'I have a question' }}" target="_blank" class="w-12 h-12 bg-green-800 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-all duration-300 transform hover:scale-110 shadow-lg">
+                            <i class="fab fa-whatsapp text-xl"></i>
                             </a>
                             @endif
 
