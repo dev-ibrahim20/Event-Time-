@@ -33,7 +33,7 @@
                 <!-- Service Image -->
                 <div class="relative h-64 bg-gradient-to-br from-red-50 to-red-100 overflow-hidden">
                     @if($service->image)
-                    <img src="{{ asset($service->image) }}" 
+                    <img src="{{ asset('event/public/' . $service->image) }}" 
                          alt="{{ app()->getLocale() == 'ar' ? $service->title_ar : $service->title_en }}" 
                          class="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
                          onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-50 to-red-100\'><i class=\'fas fa-campground text-red-300 text-4xl\'></i></div>'">

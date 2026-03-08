@@ -42,7 +42,7 @@
             <source src="{{ asset('assets/videos/events-hero.mp4') }}" type="video/mp4">
             <source src="{{ asset('assets/videos/hero-video.mp4') }}" type="video/mp4">
         </video> --}}
-        <img src="{{ asset('assets/images/1234.jpeg') }}" alt="وقت الحدث" class="w-full h-full object-cover">
+        <img src="{{ asset('event/public/assets/images/1234.jpeg') }}" alt="وقت الحدث" class="w-full h-full object-cover">
     </div>
     <div class="hero-overlay"></div>
     
@@ -293,7 +293,7 @@
 <section class="relative py-20 lg:py-32 bg-gradient-to-br from-red-600 to-red-800 text-white overflow-hidden">
     <!-- Background Image -->
     <div class="absolute inset-0">
-        <img src="{{ asset('assets/images/1234.jpeg') }}" 
+        <img src="{{ asset('event/public/assets/images/1234.jpeg') }}" 
              alt="Event Management Background" 
              class="w-full h-full object-cover">
     </div>

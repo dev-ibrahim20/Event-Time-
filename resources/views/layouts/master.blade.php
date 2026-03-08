@@ -53,8 +53,31 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    
+    <!-- Critical CSS -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        body { font-family: 'Tajawal', sans-serif; }
+        .font-arabic { font-family: 'Tajawal', sans-serif; }
+        .bg-gradient-to-br { background: linear-gradient(135deg, var(--tw-gradient-stops)); }
+        .from-red-600 { --tw-gradient-from: #dc2626; }
+        .to-red-800 { --tw-gradient-to: #991b1b; }
+        .text-white { color: white; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .text-center { text-align: center; }
+        .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .object-cover { object-fit: cover; }
+        .z-10 { z-index: 10; }
+    </style>
     
     <!-- Styles -->
     @vite(['resources/assets/css/app.css'])
@@ -62,17 +85,26 @@
     <!-- Schema.org structured data -->
     @yield('structured-data')
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google Analytics - Optimized for FCP -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID', {
-            'anonymize_ip': true,
-            'custom_map': {'custom_parameter_1': 'language'}
+        // Load analytics after page load to improve FCP
+        window.addEventListener('load', function() {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID';
+            document.head.appendChild(script);
+            
+            script.onload = function() {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'GA_MEASUREMENT_ID', {
+                    'anonymize_ip': true,
+                    'custom_map': {'custom_parameter_1': 'language'}
+                });
+                gtag('event', 'language_dimension', {'language': '{{ app()->getLocale() }}'});
+            };
         });
-        gtag('event', 'language_dimension', {'language': '{{ app()->getLocale() }}'});
     </script>
     
     <!-- Google Search Console Verification -->

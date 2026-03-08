@@ -4,17 +4,9 @@ Disallow: /admin/
 Disallow: /api/
 Disallow: /storage/
 Disallow: /vendor/
-Disallow: /.env
-Disallow: /composer.json
-Disallow: /composer.lock
-Disallow: /package.json
-Disallow: /package-lock.json
-Disallow: /vite.config.js
-Disallow: /tailwind.config.js
-Disallow: /webpack.mix.js
 
 # Sitemap
-Sitemap: {{ url('/sitemap.xml') }}
+Sitemap: https://eventtimesa.com/sitemap.xml
 
 # Crawl-delay (optional, be respectful)
 Crawl-delay: 1
